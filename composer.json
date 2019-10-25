@@ -1,0 +1,20 @@
+{
+    "name": "cz.cvut.fit/twa-semestralka",
+  "description": "Semestralni prace z predmetu BI-TWA.1",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Dinh Tuan LE",
+      "email": "letuan@fit.cvut.cz"
+    },
+    {
+      "name": "Duc Thang NGUYEN",
+      "email": "nguyed14@fit.cvut.cz"
+    },
+    {
+      "name": "Tomas LE",
+      "email": "letomas@fit.cvut.cz"
+    }
+  ]
+}
