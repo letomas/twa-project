@@ -1,3 +1,4 @@
+[db]: /readme/diagram(4).png "Conceptual database model"
 # Semestral work TWA.1 - booking system
 
 ## Dependencies
@@ -8,10 +9,10 @@
 
 ## Setup
 1. Download/Clone repository
-2. Run in the console `symfony server-start`
+2. Run in the console `symfony server:start`
 
 ## Conceptual database model of the app
-![alt text](/readme/diagram(4).png "Conceptual database model")
+![alt text][db]
 
 # Semestrálka TWA.1 - rezervační systém
 
@@ -23,7 +24,7 @@
 
 ## Instalace a spuštění
 1. Stáhnout si repozitář
-2. Spustit v konzoli `symfony server-start`
+2. Spustit v konzoli `symfony server:start`
 
 ## Konceptuální databázový model aplikace
-![alt text](/readme/diagram(4).png "Conceptual database model")
+![alt text][db]
