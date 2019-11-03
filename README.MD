@@ -11,7 +11,7 @@
 2. Run in the console `symfony server-start`
 
 ## Conceptual database model of the app
-![alt text](/readme/diagram(2).png "Conceptual database model")
+![alt text](/readme/diagram(4).png "Conceptual database model")
 
 # Semestrálka TWA.1 - rezervační systém
 
@@ -26,4 +26,4 @@
 2. Spustit v konzoli `symfony server-start`
 
 ## Konceptuální databázový model aplikace
-![alt text](/readme/diagram(2).png "Conceptual database model")
+![alt text](/readme/diagram(4).png "Conceptual database model")
