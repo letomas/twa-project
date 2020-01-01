@@ -27,6 +27,26 @@ class BuildingController extends AbstractController
     }
 
     /**
+     * @Route("/detail/{id}", name="building_detail", requirements={"id": "\d+"})
+     *
+     * @param $id
+     * @return Response
+     */
+    public function detailAction($id)
+    {
+        $building = $this->getDoctrine()->getRepository(Building::class)->find($id);
+
+        if ($building === null)
+        {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('building/detail.html.twig', [
+            'building' => $building,
+        ]);
+    }
+
+    /**
      * @Route("/create", name="building_create", defaults={"id": null})
      * @Route("/edit/{id}", name="building_edit", requirements={"id": "\d+"})
      *
