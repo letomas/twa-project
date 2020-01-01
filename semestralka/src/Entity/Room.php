@@ -36,14 +36,14 @@ class Room
     private $building = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="$roomsManager")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="roomsManager")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
     private $manageBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="$roomOccupy")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="roomOccupy")
      * @ORM\JoinTable(name="room_occupy",
      *      joinColumns={@ORM\JoinColumn(name="room_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}

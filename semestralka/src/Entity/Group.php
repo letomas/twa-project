@@ -45,7 +45,7 @@ class Group
     private $superGroup;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="groupMember")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
      * @ORM\JoinTable(name="group_member",
      *      joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")}

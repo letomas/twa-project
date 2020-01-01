@@ -82,7 +82,7 @@ class User
     private $groupManager;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="groupMembers")
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
      * @ORM\JoinTable(name="group_member",
      *      joinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
