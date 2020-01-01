@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation\MaxDepth;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class Account
 {
     /**
      * @ORM\Id()

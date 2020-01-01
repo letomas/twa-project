@@ -23,7 +23,7 @@ class Group
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="groupManager", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Account", mappedBy="groupManager", cascade={"persist"})
      * @MaxDepth(1)
      */
     private $manageBy;
@@ -45,7 +45,7 @@ class Group
     private $superGroup;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
+     * @ORM\ManyToMany(targetEntity="Account", inversedBy="groups")
      * @ORM\JoinTable(name="group_member",
      *      joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")}

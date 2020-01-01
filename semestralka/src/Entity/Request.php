@@ -33,14 +33,14 @@ class Request
     private $end;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="requestAuthor")
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="requestAuthor")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
     private $createBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="requestsAttendees")
+     * @ORM\ManyToMany(targetEntity="Account", inversedBy="requestsAttendees")
      * @ORM\JoinTable(name="request_attendee",
      *      joinColumns={@ORM\JoinColumn(name="request_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="attendee_id", referencedColumnName="id")}
