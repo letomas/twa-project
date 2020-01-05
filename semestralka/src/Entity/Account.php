@@ -49,7 +49,7 @@ class Account implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $role;
+    private $roles = [];
 
     /**
      * @ORM\ManyToMany(targetEntity="Request", mappedBy="attendees")
@@ -105,7 +105,10 @@ class Account implements UserInterface
         $roles = [];
 
         $roles[] = 'ROLE_USER';
-        $roles[] = 'ROLE_'.strtoupper($this->getRole());
+
+        foreach ($this->roles as $role){
+            $roles[] = 'ROLE_'.strtoupper($role);
+        }
 
         return array_unique($roles);
     }
@@ -287,18 +290,6 @@ class Account implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
