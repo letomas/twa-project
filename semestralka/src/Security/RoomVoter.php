@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
+use App\Entity\Group;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -52,56 +53,20 @@ class RoomVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($account, $room);
+                return $this->canView($room);
             case self::EDIT:
                 return $this->canEdit($account, $room);
             case self::DELETE:
-                return $this->canDelete($account, $room);
+                return $this->canDelete();
             case self::ADD:
-                return $this->canAdd($account, $room);
+                return $this->canAdd();
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function isRoomAdmin(Account $account, $roomId)
-    {
-        // mistnosti jejiz jsem spravcem
-        foreach ($account->getRoomsManager() as $room){
-            if ($room->getId() === $roomId){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function isGroupAdminRoom(Account $account, $roomId)
-    {
-        // mistnosti jejiz patri do skupiny a jsem v te skupine
-        foreach ($account->getGroups() as $group){
-            // jestli patri mistnost skupine
-            foreach ($group->getRooms() as $room){
-                if ($room->getId() === $roomId){
-                    return true;
-                }
-            }
-
-            // jestli patri nejake podskupine
-            foreach ($group->getSubGroup() as $subGroup){
-                foreach ($subGroup->getRooms() as $room) {
-                    if ($room->getId() === $roomId){
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     // pokud je mistnost verejna muzou se podivat vsichni, jinak musi byt uzivatel
-    private function canView(Account $account, Room $room)
+    private function canView(Room $room)
     {
         if ($room->getType() == 'public'){
             return true;
@@ -113,18 +78,44 @@ class RoomVoter extends Voter
     // jenom kdyz je groupAdmin danne mistnosti
     private function canEdit(Account $account, Room $room)
     {
-        return $this->isGroupAdminRoom($account, $room->getId());
+        return $this->isRoomGroupAdmin($account, $room);
     }
 
     // pouze super admin
-    private function canDelete(Account $account, Room $room)
+    private function canDelete()
     {
         return false;
     }
 
     // pouze super admin
-    private function canAdd(Account $account, Room $room)
+    private function canAdd()
     {
+        return false;
+    }
+
+    private function isRoomGroupAdmin(Account $account, Room $room)
+    {
+        $roomGroup = $room->getGroup();
+        $groupManagedByAccount = $account->getGroupManager();
+
+        if(!$groupManagedByAccount) {
+            return false;
+        }
+
+        if($roomGroup === $groupManagedByAccount) {
+            return true;
+        }
+
+        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+    }
+
+    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+        foreach ($subgroups as $subgroup) {
+            if($subgroup === $group) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

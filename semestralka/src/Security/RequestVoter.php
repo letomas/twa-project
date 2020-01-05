@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
+use App\Entity\Group;
 use App\Entity\Request;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -58,7 +59,7 @@ class RequestVoter extends Voter
             case self::EDIT:
                 return $this->canEdit($account, $request);
             case self::DELETE:
-                return $this->canDelete($account, $request);
+                return $this->canDelete();
             case self::ADD:
                 return $this->canAdd($account, $request);
             case self::APPROVE:
@@ -73,7 +74,7 @@ class RequestVoter extends Voter
         // vsichni co jsou v seznamu mohou se podivat na request
 
         foreach ($request->getAttendees() as $attendee){
-            if ($attendee->getId() === $account->getId()){
+            if ($attendee === $account){
                 return true;
             }
         }
@@ -81,105 +82,86 @@ class RequestVoter extends Voter
         return $this->canEdit($account, $request);
     }
 
-    private function isRoomAdmin(Account $account, $roomId)
-    {
-        // mistnosti jejiz jsem spravcem
-        foreach ($account->getRoomsManager() as $room){
-            if ($room->getId() === $roomId){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function isGroupMember(Account $account, $roomId)
-    {
-        foreach ($account->getGroups() as $group){
-            foreach ($group->getRooms() as $room){
-                if ($room->getId() === $roomId){
-                    return true;
-                }
-            }
-        }
-    }
-
-    private function isGroupAdminRoom(Account $account, $roomId)
-    {
-        // mistnosti jejiz patri do skupiny a jsem v te skupine
-        foreach ($account->getRoomsManager() as $group){
-            // jestli patri mistnost skupine
-            foreach ($account->getGroups() as $group){
-                foreach ($group->getRooms() as $room){
-                    if ($room->getId() === $roomId){
-                        return true;
-                    }
-                }
-            }
-
-            // jestli patri nejake podskupine
-            foreach ($group->getSubGroup() as $subGroup){
-                foreach ($subGroup->getRooms() as $room) {
-                    if ($room->getId() === $roomId){
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     private function canEdit(Account $account, Request $request)
     {
-        if ($this->isRoomAdmin($account, $request->getRoom()->getId()))
-        {
-            return true;
-        }
-
-        if ($this->isGroupAdminRoom($account, $request->getRoom()->getId())){
-            return true;
-        }
-
-        return false;
+        $room = $request->getRoom();
+        return ($this->isRoomAdmin($account, $room) || $this->isRoomGroupAdmin($account, $room));
     }
 
     // pouze super admin
-    private function canDelete(Account $account, Request $request)
+    private function canDelete()
     {
         return false;
     }
 
     private function canAdd(Account $account, Request $request)
     {
-        $roomId = $request->getRoom()->getId();
+        $room = $request->getRoom();
+        $group = $room->getGroup();
         // mistnosti jejiz jsem uzivatelem
-        foreach ($account->getRoomOccupy() as $room){
-            if ($room->getId() === $roomId){
+        foreach ($account->getRoomOccupy() as $occupiedRoom){
+            if ($occupiedRoom === $room){
                 return true;
             }
         }
 
-        if ($this->isGroupMember($account, $roomId))
-        {
-            return true;
-        }
-
-        if ($this->isRoomAdmin($account, $roomId))
-        {
-            return true;
-        }
-
-        if ($this->isGroupAdminRoom($account, $roomId)){
-            return true;
-        }
-
-        return false;
+        return ($this->isGroupMember($account, $group)
+            || $this->isRoomAdmin($account, $room)
+            || $this->isRoomGroupAdmin($account, $room));
     }
 
     // muze menit tak muze i schvalit
     private function canApprove(Account $account, $request)
     {
         return $this->canEdit($account, $request);
+    }
+
+    private function isRoomAdmin(Account $account, Room $room)
+    {
+        // mistnosti jejiz jsem spravcem
+        foreach ($account->getRoomsManager() as $managedRoom){
+            if ($managedRoom === $room){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isGroupMember(Account $account, Group $group)
+    {
+        foreach ($account->getGroups() as $userGroup){
+            if($group === $userGroup) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isRoomGroupAdmin(Account $account, Room $room)
+    {
+        $roomGroup = $room->getGroup();
+        $groupManagedByAccount = $account->getGroupManager();
+
+        if(!$groupManagedByAccount) {
+            return false;
+        }
+
+        if($roomGroup === $groupManagedByAccount) {
+            return true;
+        }
+
+        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+    }
+
+    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+        foreach ($subgroups as $subgroup) {
+            if($subgroup === $group) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
