@@ -100,17 +100,20 @@ class Account implements UserInterface
      */
     private $groups = [];
 
-    public function getRoles() : array
+    /**
+     * @return array
+     */
+    public function getRoles(): array
     {
-        $roles = [];
+        return $this->roles;
+    }
 
-        $roles[] = 'ROLE_USER';
-
-        foreach ($this->roles as $role){
-            $roles[] = 'ROLE_'.strtoupper($role);
-        }
-
-        return array_unique($roles);
+    /**
+     * @param array $roles
+     */
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
     }
 
     /**

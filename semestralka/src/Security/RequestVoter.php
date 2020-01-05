@@ -77,7 +77,8 @@ class RequestVoter extends Voter
                 return true;
             }
         }
-        return false;
+
+        return $this->canEdit($account, $request);
     }
 
     private function isRoomAdmin(Account $account, $roomId)
@@ -92,14 +93,27 @@ class RequestVoter extends Voter
         return false;
     }
 
-    private function isGroupAdminRoom(Account $account, $roomId)
+    private function isGroupMember(Account $account, $roomId)
     {
-        // mistnosti jejiz patri do skupiny a jsem v te skupine
         foreach ($account->getGroups() as $group){
-            // jestli patri mistnost skupine
             foreach ($group->getRooms() as $room){
                 if ($room->getId() === $roomId){
                     return true;
+                }
+            }
+        }
+    }
+
+    private function isGroupAdminRoom(Account $account, $roomId)
+    {
+        // mistnosti jejiz patri do skupiny a jsem v te skupine
+        foreach ($account->getRoomsManager() as $group){
+            // jestli patri mistnost skupine
+            foreach ($account->getGroups() as $group){
+                foreach ($group->getRooms() as $room){
+                    if ($room->getId() === $roomId){
+                        return true;
+                    }
                 }
             }
 
@@ -144,6 +158,11 @@ class RequestVoter extends Voter
             if ($room->getId() === $roomId){
                 return true;
             }
+        }
+
+        if ($this->isGroupMember($account, $roomId))
+        {
+            return true;
         }
 
         if ($this->isRoomAdmin($account, $roomId))
