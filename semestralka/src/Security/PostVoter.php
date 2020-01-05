@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
-class EmployeeVoter extends Voter
+class PostVoter extends Voter
 {
     const VIEW = 'view';
     const EDIT = 'edit';
