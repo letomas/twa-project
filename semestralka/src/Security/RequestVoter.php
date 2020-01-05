@@ -106,6 +106,7 @@ class RequestVoter extends Voter
     private function canAdd(Account $account, Request $request)
     {
         $room = $request->getRoom();
+        $group = $room->getGroup();
         // mistnosti jejiz jsem uzivatelem
         foreach ($account->getRoomOccupy() as $occupiedRoom){
             if ($occupiedRoom === $room){
@@ -113,7 +114,7 @@ class RequestVoter extends Voter
             }
         }
 
-        if ($this->isGroupMember($account, $room))
+        if ($this->isGroupMember($account, $group))
         {
             return true;
         }
@@ -148,13 +149,11 @@ class RequestVoter extends Voter
         return false;
     }
 
-    private function isGroupMember(Account $account, Room $room)
+    private function isGroupMember(Account $account, Group $group)
     {
-        foreach ($account->getGroups() as $group){
-            foreach ($group->getRooms() as $groupRoom){
-                if ($groupRoom === $room){
-                    return true;
-                }
+        foreach ($account->getGroups() as $userGroup){
+            if($group === $userGroup) {
+                return true;
             }
         }
 
