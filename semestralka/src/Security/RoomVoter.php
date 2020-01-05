@@ -64,21 +64,21 @@ class RoomVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function isGroupAdminRoom(Account $account, $roomId)
+    private function isGroupAdminRoom(Account $account, $room)
     {
         // mistnosti jejiz patri do skupiny a jsem v te skupine
         foreach ($account->getGroups() as $group){
             // jestli patri mistnost skupine
-            foreach ($group->getRooms() as $room){
-                if ($room->getId() === $roomId){
+            foreach ($group->getRooms() as $groupRoom){
+                if ($groupRoom === $room){
                     return true;
                 }
             }
 
             // jestli patri nejake podskupine
             foreach ($group->getSubGroup() as $subGroup){
-                foreach ($subGroup->getRooms() as $room) {
-                    if ($room->getId() === $roomId){
+                foreach ($subGroup->getRooms() as $groupRoom) {
+                    if ($groupRoom === $room){
                         return true;
                     }
                 }
@@ -101,7 +101,7 @@ class RoomVoter extends Voter
     // jenom kdyz je groupAdmin danne mistnosti
     private function canEdit(Account $account, Room $room)
     {
-        return $this->isGroupAdminRoom($account, $room->getId());
+        return $this->isGroupAdminRoom($account, $room);
     }
 
     // pouze super admin
