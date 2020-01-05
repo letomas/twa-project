@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Group;
+use App\Service\GroupOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class GroupController extends AbstractController
 {
+    /**
+     * @var
+     */
+    protected $groupOperation;
+
+    /**
+     * GroupController constructor.
+     * @param $groupOperation
+     */
+    public function __construct(GroupOperation $groupOperation)
+    {
+        $this->groupOperation = $groupOperation;
+    }
+
     /**
      * @Route("/", name="groups")
      */
@@ -66,12 +81,10 @@ class GroupController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 if($id) {
-                    $em->flush();
+                    $this->groupOperation->update();
                 } else {
-                    $em->persist($group);
-                    $em->flush();
+                    $this->groupOperation->save($group);
                 }
 
                 return $this->redirectToRoute('group_detail', [
@@ -109,9 +122,7 @@ class GroupController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($group);
-        $em->flush();
+        $this->groupOperation->remove($group);
 
         return $this->redirectToRoute('groups');
     }

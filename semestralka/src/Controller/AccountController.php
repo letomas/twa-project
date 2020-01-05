@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\AccountOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AccountController extends AbstractController
 {
+    /**
+     * @var AccountOperation
+     */
+    protected $accountOperation;
+
+    /**
+     * AccountController constructor.
+     * @param $accountOperation
+     */
+    public function __construct(AccountOperation $accountOperation)
+    {
+        $this->accountOperation = $accountOperation;
+    }
+
     /**
      * @Route("/", name="accounts")
      */
@@ -65,12 +80,10 @@ class AccountController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 if($id) {
-                    $em->flush();
+                    $this->accountOperation->update();
                 } else {
-                    $em->persist($account);
-                    $em->flush();
+                    $this->accountOperation->save($account)
                 }
 
                 return $this->redirectToRoute('account_detail', [
@@ -108,9 +121,7 @@ class AccountController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($account);
-        $em->flush();
+        $this->accountOperation->remove($account);
 
         return $this->redirectToRoute('accounts');
     }

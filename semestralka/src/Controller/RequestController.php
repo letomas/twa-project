@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Request;
+use App\Service\RequestOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RequestController extends AbstractController
 {
+    /**
+     * @var
+     */
+    protected $requestOperation;
+
+    /**
+     * RequestController constructor.
+     * @param $requestOperation
+     */
+    public function __construct(RequestOperation $requestOperation)
+    {
+        $this->requestOperation = $requestOperation;
+    }
+
     /**
      * @Route("/", name="requests")
      */
@@ -66,12 +81,10 @@ class RequestController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 if($id) {
-                    $em->flush();
+                    $this->requestOperation->update();
                 } else {
-                    $em->persist($request);
-                    $em->flush();
+                    $this->requestOperation->save($request);
                 }
 
                 return $this->redirectToRoute('request_detail', [
@@ -109,9 +122,7 @@ class RequestController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($request);
-        $em->flush();
+        $this->requestOperation->remove($request);
 
         return $this->redirectToRoute('requests');
     }
