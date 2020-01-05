@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
+use App\Entity\Group;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -64,30 +65,6 @@ class RoomVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function isGroupAdminRoom(Account $account, $room)
-    {
-        // mistnosti jejiz patri do skupiny a jsem v te skupine
-        foreach ($account->getGroups() as $group){
-            // jestli patri mistnost skupine
-            foreach ($group->getRooms() as $groupRoom){
-                if ($groupRoom === $room){
-                    return true;
-                }
-            }
-
-            // jestli patri nejake podskupine
-            foreach ($group->getSubGroup() as $subGroup){
-                foreach ($subGroup->getRooms() as $groupRoom) {
-                    if ($groupRoom === $room){
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     // pokud je mistnost verejna muzou se podivat vsichni, jinak musi byt uzivatel
     private function canView(Room $room)
     {
@@ -101,7 +78,7 @@ class RoomVoter extends Voter
     // jenom kdyz je groupAdmin danne mistnosti
     private function canEdit(Account $account, Room $room)
     {
-        return $this->isGroupAdminRoom($account, $room);
+        return $this->isRoomGroupAdmin($account, $room);
     }
 
     // pouze super admin
@@ -113,6 +90,32 @@ class RoomVoter extends Voter
     // pouze super admin
     private function canAdd()
     {
+        return false;
+    }
+
+    private function isRoomGroupAdmin(Account $account, Room $room)
+    {
+        $roomGroup = $room->getGroup();
+        $groupManagedByAccount = $account->getGroupManager();
+
+        if(!$groupManagedByAccount) {
+            return false;
+        }
+
+        if($roomGroup === $groupManagedByAccount) {
+            return true;
+        }
+
+        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+    }
+
+    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+        foreach ($subgroups as $subgroup) {
+            if($subgroup === $group) {
+                return true;
+            }
+        }
+
         return false;
     }
 }

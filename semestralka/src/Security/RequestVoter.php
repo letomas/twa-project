@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
+use App\Entity\Group;
 use App\Entity\Request;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -81,55 +82,6 @@ class RequestVoter extends Voter
         return $this->canEdit($account, $request);
     }
 
-    private function isRoomAdmin(Account $account, Room $room)
-    {
-        // mistnosti jejiz jsem spravcem
-        foreach ($account->getRoomsManager() as $managedRoom){
-            if ($managedRoom === $room){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function isGroupMember(Account $account, Room $room)
-    {
-        foreach ($account->getGroups() as $group){
-            foreach ($group->getRooms() as $groupRoom){
-                if ($groupRoom === $room){
-                    return true;
-                }
-            }
-        }
-    }
-
-    private function isGroupAdminRoom(Account $account, Room $room)
-    {
-        // mistnosti jejiz patri do skupiny a jsem v te skupine
-        foreach ($account->getRoomsManager() as $group){
-            // jestli patri mistnost skupine
-            foreach ($account->getGroups() as $group){
-                foreach ($group->getRooms() as $groupRoom){
-                    if ($groupRoom === $room){
-                        return true;
-                    }
-                }
-            }
-
-            // jestli patri nejake podskupine
-            foreach ($group->getSubGroup() as $subGroup){
-                foreach ($subGroup->getRooms() as $groupRoom) {
-                    if ($groupRoom === $room){
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     private function canEdit(Account $account, Request $request)
     {
         $room = $request->getRoom();
@@ -138,7 +90,7 @@ class RequestVoter extends Voter
             return true;
         }
 
-        if ($this->isGroupAdminRoom($account, $room)){
+        if ($this->isRoomGroupAdmin($account, $room)){
             return true;
         }
 
@@ -171,7 +123,7 @@ class RequestVoter extends Voter
             return true;
         }
 
-        if ($this->isGroupAdminRoom($account, $room)){
+        if ($this->isRoomGroupAdmin($account, $room)){
             return true;
         }
 
@@ -182,5 +134,56 @@ class RequestVoter extends Voter
     private function canApprove(Account $account, $request)
     {
         return $this->canEdit($account, $request);
+    }
+
+    private function isRoomAdmin(Account $account, Room $room)
+    {
+        // mistnosti jejiz jsem spravcem
+        foreach ($account->getRoomsManager() as $managedRoom){
+            if ($managedRoom === $room){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isGroupMember(Account $account, Room $room)
+    {
+        foreach ($account->getGroups() as $group){
+            foreach ($group->getRooms() as $groupRoom){
+                if ($groupRoom === $room){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function isRoomGroupAdmin(Account $account, Room $room)
+    {
+        $roomGroup = $room->getGroup();
+        $groupManagedByAccount = $account->getGroupManager();
+
+        if(!$groupManagedByAccount) {
+            return false;
+        }
+
+        if($roomGroup === $groupManagedByAccount) {
+            return true;
+        }
+
+        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+    }
+
+    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+        foreach ($subgroups as $subgroup) {
+            if($subgroup === $group) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
