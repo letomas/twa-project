@@ -52,13 +52,13 @@ class RoomVoter extends Voter
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($account, $room);
+                return $this->canView($room);
             case self::EDIT:
                 return $this->canEdit($account, $room);
             case self::DELETE:
-                return $this->canDelete($account, $room);
+                return $this->canDelete();
             case self::ADD:
-                return $this->canAdd($account, $room);
+                return $this->canAdd();
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -89,7 +89,7 @@ class RoomVoter extends Voter
     }
 
     // pokud je mistnost verejna muzou se podivat vsichni, jinak musi byt uzivatel
-    private function canView(Account $account, Room $room)
+    private function canView(Room $room)
     {
         if ($room->getType() == 'public'){
             return true;
@@ -105,13 +105,13 @@ class RoomVoter extends Voter
     }
 
     // pouze super admin
-    private function canDelete(Account $account, Room $room)
+    private function canDelete()
     {
         return false;
     }
 
     // pouze super admin
-    private function canAdd(Account $account, Room $room)
+    private function canAdd()
     {
         return false;
     }

@@ -58,7 +58,7 @@ class RequestVoter extends Voter
             case self::EDIT:
                 return $this->canEdit($account, $request);
             case self::DELETE:
-                return $this->canDelete($account, $request);
+                return $this->canDelete();
             case self::ADD:
                 return $this->canAdd($account, $request);
             case self::APPROVE:
@@ -146,7 +146,7 @@ class RequestVoter extends Voter
     }
 
     // pouze super admin
-    private function canDelete(Account $account, Request $request)
+    private function canDelete()
     {
         return false;
     }
