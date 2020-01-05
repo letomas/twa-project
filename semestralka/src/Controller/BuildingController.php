@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Building;
+use App\Service\BuildingOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BuildingController extends AbstractController
 {
+    /**
+     * @var
+     */
+    protected $buildingOperation;
+
+    /**
+     * BuildingController constructor.
+     * @param $buildingOperation
+     */
+    public function __construct(BuildingOperation $buildingOperation)
+    {
+        $this->buildingOperation = $buildingOperation;
+    }
+
     /**
      * @Route("/", name="buildings")
      */
@@ -65,12 +80,10 @@ class BuildingController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 if($id) {
-                    $em->flush();
+                    $this->buildingOperation->update();
                 } else {
-                    $em->persist($building);
-                    $em->flush();
+                    $this->buildingOperation->save($building);
                 }
 
                 return $this->redirectToRoute('building_detail', [
@@ -108,9 +121,7 @@ class BuildingController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($building);
-        $em->flush();
+        $this->buildingOperation->remove($building);
 
         return $this->redirectToRoute('buildings');
     }

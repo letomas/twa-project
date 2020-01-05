@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Room;
+use App\Service\RoomOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,20 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RoomController extends AbstractController
 {
+    /**
+     * @var
+     */
+    protected $roomOperation;
+
+    /**
+     * RoomController constructor.
+     * @param $roomOperation
+     */
+    public function __construct(RoomOperation $roomOperation)
+    {
+        $this->roomOperation = $roomOperation;
+    }
+
     /**
      * @Route("/", name="rooms")
      */
@@ -66,12 +81,10 @@ class RoomController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 if($id) {
-                    $em->flush();
+                    $this->roomOperation->update();
                 } else {
-                    $em->persist($room);
-                    $em->flush();
+                    $this->roomOperation->save($room);
                 }
 
                 return $this->redirectToRoute('room_detail', [
@@ -109,9 +122,7 @@ class RoomController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($room);
-        $em->flush();
+        $this->roomOperation->remove($room);
 
         return $this->redirectToRoute('rooms');
     }
