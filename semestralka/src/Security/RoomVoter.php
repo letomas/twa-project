@@ -64,18 +64,6 @@ class RoomVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function isRoomAdmin(Account $account, $roomId)
-    {
-        // mistnosti jejiz jsem spravcem
-        foreach ($account->getRoomsManager() as $room){
-            if ($room->getId() === $roomId){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private function isGroupAdminRoom(Account $account, $roomId)
     {
         // mistnosti jejiz patri do skupiny a jsem v te skupine
