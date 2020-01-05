@@ -100,6 +100,16 @@ class Account implements UserInterface
      */
     private $groups = [];
 
+    public function getRoles() : array
+    {
+        $roles = [];
+
+        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_'.strtoupper($this->getRole());
+
+        return array_unique($roles);
+    }
+
     /**
      * @return mixed
      */
@@ -307,10 +317,5 @@ class Account implements UserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
-    }
-
-    public function getRoles()
-    {
-        return $this->role;
     }
 }

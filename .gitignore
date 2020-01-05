@@ -157,3 +157,20 @@ fabric.properties
 /web/js/
 
 # End of https://www.gitignore.io/api/symfony,composer,phpstorm
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+###< symfony/web-server-bundle ###
