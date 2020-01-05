@@ -85,16 +85,7 @@ class RequestVoter extends Voter
     private function canEdit(Account $account, Request $request)
     {
         $room = $request->getRoom();
-        if ($this->isRoomAdmin($account, $room))
-        {
-            return true;
-        }
-
-        if ($this->isRoomGroupAdmin($account, $room)){
-            return true;
-        }
-
-        return false;
+        return ($this->isRoomAdmin($account, $room) || $this->isRoomGroupAdmin($account, $room));
     }
 
     // pouze super admin
@@ -114,21 +105,9 @@ class RequestVoter extends Voter
             }
         }
 
-        if ($this->isGroupMember($account, $group))
-        {
-            return true;
-        }
-
-        if ($this->isRoomAdmin($account, $room))
-        {
-            return true;
-        }
-
-        if ($this->isRoomGroupAdmin($account, $room)){
-            return true;
-        }
-
-        return false;
+        return ($this->isGroupMember($account, $group)
+            || $this->isRoomAdmin($account, $room)
+            || $this->isRoomGroupAdmin($account, $room));
     }
 
     // muze menit tak muze i schvalit
