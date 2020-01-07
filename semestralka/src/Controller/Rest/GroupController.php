@@ -68,6 +68,34 @@ class GroupController extends AbstractFOSRestController
         return $this->redirectView($this->generateUrl('api_get_groups'));
     }
 
+    public function getAccountsAction($id) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
+
+        $members = $group->getMembers();
+        if(!$members) {
+            throw $this->createNotFoundException();
+        }
+
+        return $members;
+    }
+
+    public function getRoomsAction($id) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
+
+        $rooms = $group->getRooms();
+        if(!$rooms) {
+            throw $this->createNotFoundException();
+        }
+
+        return $rooms;
+    }
+
     public function putAccountAction($id, $slug) {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);

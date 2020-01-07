@@ -4,9 +4,11 @@
 namespace App\Controller\Rest;
 
 use App\Entity\Request;
+use App\Form\RequestType;
 use App\Service\RequestOperation;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
@@ -53,6 +55,25 @@ class RequestController extends AbstractFOSRestController
         }
 
         return $request;
+    }
+
+    public function putAction($id, ParamFetcherInterface $fetcher) {
+        $request = $this->getDoctrine()->getRepository(Request::class)->find($id);
+        if (!$request) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(
+            RequestType::class, $request, [
+            'csrf_protection' => false,
+        ])->submit($fetcher->all());
+
+        if ( !$form->isSubmitted() || !$form->isValid() ) {
+            return $form;
+        }
+
+        $this->requestOperation->update();
+        return $this->redirectView($this->generateUrl('api_get_request', [ 'id' => $request->getId() ]));
     }
 
     public function deleteAction($id)
