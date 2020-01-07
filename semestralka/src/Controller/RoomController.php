@@ -45,7 +45,7 @@ class RoomController extends AbstractController
     }
 
     /**
-     * @Route("/detail/{id}", name="room_detail", requirements={"id": "\d+"})
+     * @Route("/detail/{id}", methods={"GET"}, name="room_detail", requirements={"id": "\d+"})
      *
      * @param $id
      * @return Response
