@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Roboto&display=swap" rel="stylesheet">
+    <title>{% block title 'Room Booking'|title %}</title>
+    <script type="text/javascript" src="/js/script.js" async></script>
+</head>
+<body>
+<div class="header-navigation">
+    <h1>
+        <a href="{{ path( 'index' ) }}">Room Booking</a>
+    </h1>
+    {% block headerNavigation %}
+        <nav>
+            <a href="{{ path( 'index' ) }}" id="nav-option--highlighted">rooms</a>
+            <a href="">bookings</a>
+            <a id="sub-nav-title--manage" href="#">manage</a>
+            <nav id="sub-nav--manage">
+                <a href="{{ path( 'requests' ) }}">room requests</a>
+                <a href="">room admins</a>
+                <a href="{{ path( 'groups' ) }}">groups</a>
+                <a href="{{ path('rooms') }}">rooms</a>
+                <a href="{{ path( 'buildings' ) }}">buildings</a>
+            </nav>
+            <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+        </nav>
+    {% endblock %}
+</div>
+{% block section %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,88 @@
+.header-navigation {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    box-shadow: 0 1px 6px rgba($color-black, .2);
+    padding: .5rem;
+    background-color: $color-white;
+    z-index: 1;
+
+    & h1 a {
+        position: absolute;
+        top: 50%;
+        line-height: 0;
+        left: 3.5rem;
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 2.1rem;
+        font-family: $font-josefin-sans;
+        font-weight: 100;
+        color: $color-grey-dark;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        @include respond(extra-small) {
+            top: 40%;
+        }
+    }
+
+    & nav {
+        position: absolute;
+        left: 10%;
+        top: 38%; 
+        transform: translate(50%, 0);
+
+        @include respond(tab-port) {
+            top: 42%;
+        }
+
+        @include respond(phone) {
+            right: 12rem;
+        }
+
+        @include respond(extra-small) {
+            top: 70%;
+        }
+
+        & a {
+            margin: 0 .5rem 0 .5rem;
+            font-family: $font-nunito;
+            font-weight: 800;
+            color: $color-grey-light;
+            text-decoration: none;
+            transition: all .2s;
+            text-transform: uppercase;
+
+            &:hover {
+                color: $color-pink;
+            }
+        }
+
+        & nav {
+            display: block;
+            overflow: hidden;
+            position: absolute;
+            background-color: $color-white;
+            width: 17rem;
+            height: 0;
+            left: 9.1rem;
+            top: 2.5rem;
+            box-shadow: 0 1px 6px rgba($color-black, .2);
+
+            & a {
+                display: block;
+            }
+        }
+    }
+}
+
+#nav-option--highlighted {
+    color: $color-pink;
+}
+
+#nav-option--disabled:hover {
+    color: $color-grey-light;
+}

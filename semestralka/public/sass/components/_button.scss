@@ -1,0 +1,82 @@
+.btn {
+    &,
+    &:link,
+    &:visited {
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 25px;
+        padding: .5rem 2rem;
+        transition: all .2s;
+
+        // change for the <button> element
+        cursor: pointer;
+        font-family: $font-nunito;
+        font-size: 1.6rem;
+        line-height: 1.7rem;
+    }
+
+    &--view {
+        background-color: $color-white;
+        border: 1px solid $color-pink;
+        color: $color-pink;
+        box-shadow: 0 1rem 2rem rgba($color-pink, .2);
+
+        &:hover {
+            background-color: $color-pink;
+            color: $color-white;
+            box-shadow: 0 1rem 2rem rgba($color-black, .2);
+        }
+    }
+
+    &--edit {
+        background-color: $color-white;
+        border: 1px solid $color-orange;
+        color: $color-orange;
+        box-shadow: 0 1rem 2rem rgba($color-orange, .2);
+
+        &:hover {
+            background-color: $color-orange;
+            color: $color-white;
+            box-shadow: 0 1rem 2rem rgba($color-black, .2);
+        }
+    }
+
+    &--save {
+        background-color: $color-red-light;
+        border: 1px solid $color-red-dark;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-red-dark, .2);
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-red-dark;
+            box-shadow: 0 1rem 2rem rgba($color-red-dark, .2);
+        }
+    }
+
+    &--add {
+        background-color: $color-blue-light;
+        border: 1px solid $color-blue-dark;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-blue-dark, .2);
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-blue-dark;
+            box-shadow: 0 1rem 2rem rgba($color-blue-dark, .2);
+        }
+    }
+
+    &--delete {
+        background-color: $color-red-light;
+        border: 1px solid $color-red-dark;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-red-dark, .2);
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-red-dark;
+            box-shadow: 0 1rem 2rem rgba($color-red-dark, .2);
+        }
+    }
+}
