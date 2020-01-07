@@ -3,10 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Account;
+use App\Entity\Building;
 use App\Entity\Room;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
@@ -28,14 +31,24 @@ class RoomType extends AbstractType
         if ($this->security->isGranted('ROLE_SUPER_ADMIN')){
             $builder
                 ->add('name', TextType::class, ['label' => 'Name: '])
-                ->add('type', TextType::class, ['label' => 'Type: '])
+                ->add('capacity', NumberType::class, ['label' => 'Capacity: '])
+                ->add('description', TextType::class, ['label' => 'Description: '])
+                ->add('type', ChoiceType::class, [
+                    'label' => 'Room type',
+                    'choices' => [
+                        'public' => 'public',
+                        'private' => 'private',
+                    ],
+                    'required' => true,
+                    'multiple' => false,
+                ])
                 ->add('manageBy', EntityType::class, [
-                    'class' => Account::class, 'choice_label' => 'name',
+                    'class' => Account::class, 'choice_label' => 'username',
                     'multiple' => false, 'required' => false, 'label' => 'Manage by: '
                 ])
                 ->add('building', EntityType::class, [
-                    'class' => Room::class, 'choice_label' => 'name',
-                    'multiple' => false, 'required' => false, 'label' => 'Building: '
+                    'class' => Building::class, 'choice_label' => 'name',
+                    'multiple' => false, 'required' => true, 'label' => 'Building: '
                 ])
             ;
         }else if ($this->security->isGranted('ROLE_GROUP_ADMIN')){
@@ -43,7 +56,7 @@ class RoomType extends AbstractType
                 ->add('name', TextType::class, ['label' => 'Name: '])
                 ->add('type', TextType::class, ['label' => 'Type: '])
                 ->add('manageBy', EntityType::class, [
-                    'class' => Account::class, 'choice_label' => 'name',
+                    'class' => Account::class, 'choice_label' => 'username',
                     'multiple' => false, 'required' => false, 'label' => 'Manage by: '
                 ])
             ;

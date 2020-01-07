@@ -38,7 +38,12 @@
                 <span>{{ room.name }}</span>
                 <span>{{ room.capacity }}</span>
                 <span>{{ room.type }}</span>
-                <a href="#" class="btn btn--view">book</a>
+                {% if room.requests is not defined %}
+                    <a href="#" class="btn btn--view">book</a>
+                {% else %}
+                    occupy
+                {% endif %}
+                <a href={{ path('room_detail', {id : room.id}) }}>detail</a>
             </article>
         {% endfor %}
 {% endblock %}

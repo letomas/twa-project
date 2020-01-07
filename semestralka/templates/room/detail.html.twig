@@ -28,17 +28,22 @@
                 <a href="#" class="btn btn--edit">edit</a>
             </div>
             <h2>
-                Room Name
+                {{ room.name }}
             </h2>
             <h3>Room Type</h3>
-            <span>room type</span>
+            <span>{{ room.type }}</span>
             <h3>Capacity</h3>
-            <span>capacity</span>
+            <span>{{ room.capacity }}</span>
             <h3>Admin</h3>
-            <span>admin username</span>
+            {% if room.manageBy is null %}
+                <span>Not manage by anyone</span>
+            {% else %}
+                <span> {{ room.manageBy.name }}</span>
+            {% endif %}
+
             <h3>Description</h3>
             <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit distinctio cupiditate nisi. Quia non saepe facilis commodi asperiores eos. Mollitia id ipsum assumenda velit aut, magni illo illum cupiditate quibusdam!
+                {{ room.description }}
             </p>
         </article>
     </section>

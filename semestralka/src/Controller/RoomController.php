@@ -6,6 +6,7 @@ use App\Entity\Room;
 use App\Form\RoomType;
 use App\Service\RoomOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,7 +81,8 @@ class RoomController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(RoomType::class, $room);
+        $form = $this->createForm(RoomType::class, $room)
+            ->add( 'submit', SubmitType::class, ['label' => 'Save']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
