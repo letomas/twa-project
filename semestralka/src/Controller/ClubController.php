@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Club;
-use App\Form\GroupType;
+use App\Form\ClubType;
 use App\Service\ClubOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +80,7 @@ class ClubController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(GroupType::class, $club);
+        $form = $this->createForm(ClubType::class, $club);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
