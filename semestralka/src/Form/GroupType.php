@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Account;
-use App\Entity\Group;
+use App\Entity\Club;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -32,15 +32,15 @@ class GroupType extends AbstractType
                 'multiple' => false, 'required' => false, 'label' => 'Manage by: '
             ])
             ->add('subGroup', EntityType::class, [
-                'class' => Group::class, 'choice_label' => 'name',
+                'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Subgroups: '
             ])
             ->add('superGroup', EntityType::class, [
-                'class' => Group::class, 'choice_label' => 'name',
+                'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => false, 'required' => false, 'label' => 'Subgroups: '
             ])
             ->add('rooms', EntityType::class, [
-                'class' => Group::class, 'choice_label' => 'name',
+                'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Subgroups: ',
             ])
         ;
@@ -49,7 +49,7 @@ class GroupType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Group::class,
+            'data_class' => Club::class,
         ]);
     }
 }

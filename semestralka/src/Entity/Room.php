@@ -70,11 +70,11 @@ class Room
     private $requests = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="rooms", fetch="LAZY")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Club", inversedBy="rooms", fetch="LAZY")
+     * @ORM\JoinColumn(name="club_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
-    private $group;
+    private $club;
 
     /**
      * @return mixed
@@ -159,17 +159,17 @@ class Room
     /**
      * @return mixed
      */
-    public function getGroup()
+    public function getClub()
     {
-        return $this->group;
+        return $this->club;
     }
 
     /**
-     * @param mixed $group
+     * @param mixed $club
      */
-    public function setGroup($group): void
+    public function setClub($club): void
     {
-        $this->group = $group;
+        $this->club = $club;
     }
 
     /**
