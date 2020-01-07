@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ClubController
  * @package App\Controller
- * @Route("/clubs")
+ * @Route("/club")
  */
 class ClubController extends AbstractController
 {
@@ -32,14 +32,14 @@ class ClubController extends AbstractController
     }
 
     /**
-     * @Route("/", name="clubs")
+     * @Route("/", name="club")
      */
     public function listAction()
     {
         $clubs = $this->getDoctrine()->getRepository(Club::class)->findAll();
 
         return $this->render('club/index.html.twig', [
-            'clubs' => $clubs,
+            'club' => $clubs,
         ]);
     }
 
@@ -124,6 +124,6 @@ class ClubController extends AbstractController
 
         $this->clubOperation->remove($club);
 
-        return $this->redirectToRoute('clubs');
+        return $this->redirectToRoute('club');
     }
 }
