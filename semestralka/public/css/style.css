@@ -194,17 +194,22 @@ form select {
 
 .tag {
   display: inline-block;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-radius: 24px;
   font-family: "Nunito", sans-serif;
-  box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2); }
+  /*
+    box-shadow: 0 .1rem .6rem rgba($color-black, .2);*/ }
   .tag--capacity {
-    background-color: #BDADFE;
-    color: #fff; }
+    /*
+        background-color: $color-purple-light;
+        color: $color-white;*/
+    color: #BDADFE; }
   .tag--room-type {
-    background-color: #55c57a;
-    color: #fff; }
+    /*
+        background-color: $color-green;
+        color: $color-white;*/
+    color: #55c57a; }
 
 footer {
   position: absolute;
@@ -394,23 +399,7 @@ footer {
       top: 1.3rem;
       left: 2.5rem;
       font-size: 2rem; }
-    .section-list article span:nth-child(2) {
-      position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      left: 62rem; }
-    .section-list article span:nth-child(3) {
-      position: absolute;
-      left: 50rem;
-      top: 50%;
-      transform: translate(0, -50%); }
-      @media only screen and (max-width: 37.5em) {
-        .section-list article span:nth-child(3) {
-          left: 30rem; } }
-      @media only screen and (max-width: 28.75em) {
-        .section-list article span:nth-child(3) {
-          display: none; } }
-    .section-list article a {
+    .section-list article div {
       position: absolute;
       right: 2.5rem;
       top: 50%;
