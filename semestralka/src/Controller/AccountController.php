@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Form\AccountSuperAdminType;
 use App\Service\AccountOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,9 +68,10 @@ class AccountController extends AbstractController
      * @Route("/edit/{id}", name="account_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $request)
     {
         $account = $id ?
             $this->getDoctrine()->getRepository(Account::class)->find($id) : new account();

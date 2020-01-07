@@ -6,6 +6,7 @@ use App\Entity\Room;
 use App\Form\RoomType;
 use App\Service\RoomOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,9 +68,10 @@ class RoomController extends AbstractController
      * @Route("/edit/{id}", name="room_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $request)
     {
         $room = $id ?
             $this->getDoctrine()->getRepository(Room::class)->find($id) : new room();

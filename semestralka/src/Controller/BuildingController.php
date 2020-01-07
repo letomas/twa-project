@@ -6,6 +6,7 @@ use App\Entity\Building;
 use App\Form\BuildingType;
 use App\Service\BuildingOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,9 +68,10 @@ class BuildingController extends AbstractController
      * @Route("/edit/{id}", name="building_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $request)
     {
         $building = $id ?
             $this->getDoctrine()->getRepository(Building::class)->find($id) : new Building();

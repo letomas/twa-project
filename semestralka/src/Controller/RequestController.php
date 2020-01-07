@@ -67,9 +67,10 @@ class RequestController extends AbstractController
      * @Route("/edit/{id}", name="request_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $req
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $req)
     {
         $request = $id ?
             $this->getDoctrine()->getRepository(Request::class)->find($id) : new request();
@@ -79,7 +80,7 @@ class RequestController extends AbstractController
         }
 
         $form = $this->createForm(RequestType::class, $request);
-        $form->handleRequest($request);
+        $form->handleRequest($req);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if($id) {

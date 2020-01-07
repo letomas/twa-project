@@ -6,6 +6,7 @@ use App\Entity\Group;
 use App\Form\GroupType;
 use App\Service\GroupOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,9 +68,10 @@ class GroupController extends AbstractController
      * @Route("/edit/{id}", name="group_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $request)
     {
         $group = $id ?
             $this->getDoctrine()->getRepository(Group::class)->find($id) : new group();
