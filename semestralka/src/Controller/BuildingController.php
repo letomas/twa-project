@@ -89,6 +89,7 @@ class BuildingController extends AbstractController
             } else {
                 $this->buildingOperation->save($building);
             }
+
             return $this->redirectToRoute('building_detail', [
                 'id' => $building->getId(),
             ]);
@@ -104,6 +105,8 @@ class BuildingController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
+
+
     }
 
     /**
