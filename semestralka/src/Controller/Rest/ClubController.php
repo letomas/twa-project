@@ -6,7 +6,7 @@ namespace App\Controller\Rest;
 use App\Entity\Account;
 use App\Entity\Club;
 use App\Entity\Room;
-use App\Service\GroupOperation;
+use App\Service\ClubOperation;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
@@ -21,17 +21,17 @@ use FOS\RestBundle\View\View;
 class ClubController extends AbstractFOSRestController
 {
     /**
-     * @var GroupOperation
+     * @var ClubOperation
      */
-    protected $groupOperation;
+    protected $clubOperation;
 
     /**
      * ClubController constructor.
-     * @param $groupOperation
+     * @param $clubOperation
      */
-    public function __construct(GroupOperation $groupOperation)
+    public function __construct(ClubOperation $clubOperation)
     {
-        $this->groupOperation = $groupOperation;
+        $this->clubOperation = $clubOperation;
     }
 
     /**
@@ -39,12 +39,12 @@ class ClubController extends AbstractFOSRestController
      */
     public function cgetAction ()
     {
-        $groups = $this->getDoctrine()->getRepository(Club::class)->findAll();
-        if(!$groups) {
+        $clubs = $this->getDoctrine()->getRepository(Club::class)->findAll();
+        if(!$clubs) {
             throw $this->createNotFoundException();
         }
 
-        return $groups;
+        return $clubs;
     }
 
     /**
@@ -54,12 +54,12 @@ class ClubController extends AbstractFOSRestController
      */
     public function getAction($id)
     {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        if(!$group) {
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        if(!$club) {
             throw $this->createNotFoundException();
         }
 
-        return $group;
+        return $club;
     }
 
     /**
@@ -68,13 +68,13 @@ class ClubController extends AbstractFOSRestController
      */
     public function deleteAction($id)
     {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        if (!$group) {
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        if (!$club) {
             throw $this->createNotFoundException();
         }
 
-        $this->groupOperation->remove($group);
-        return $this->redirectView($this->generateUrl('api_get_groups'));
+        $this->clubOperation->remove($club);
+        return $this->redirectView($this->generateUrl('api_get_clubs'));
     }
 
     /**
@@ -82,12 +82,12 @@ class ClubController extends AbstractFOSRestController
      * @return array
      */
     public function getAccountsAction($id) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        if (!$group) {
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        if (!$club) {
             throw $this->createNotFoundException();
         }
 
-        $members = $group->getMembers();
+        $members = $club->getMembers();
         if(!$members) {
             throw $this->createNotFoundException();
         }
@@ -100,12 +100,12 @@ class ClubController extends AbstractFOSRestController
      * @return array
      */
     public function getRoomsAction($id) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        if (!$group) {
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        if (!$club) {
             throw $this->createNotFoundException();
         }
 
-        $rooms = $group->getRooms();
+        $rooms = $club->getRooms();
         if(!$rooms) {
             throw $this->createNotFoundException();
         }
@@ -119,14 +119,14 @@ class ClubController extends AbstractFOSRestController
      * @return View
      */
     public function putAccountAction($id, $slug) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
-        if (!$group || !$account) {
+        if (!$club || !$account) {
             throw $this->createNotFoundException();
         }
 
-        $this->groupOperation->addAccount($group, $account);
-        return $this->redirectView($this->generateUrl('api_get_group', [ 'id' => $group->getId() ]));
+        $this->clubOperation->addAccount($club, $account);
+        return $this->redirectView($this->generateUrl('api_get_club', [ 'id' => $club->getId() ]));
     }
 
     /**
@@ -135,14 +135,14 @@ class ClubController extends AbstractFOSRestController
      * @return View
      */
     public function deleteAccountAction($id, $slug) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
-        if (!$group || !$account) {
+        if (!$club || !$account) {
             throw $this->createNotFoundException();
         }
 
-        $this->groupOperation->removeAccount($group, $account);
-        return $this->redirectView($this->generateUrl('api_get_groups'));
+        $this->clubOperation->removeAccount($club, $account);
+        return $this->redirectView($this->generateUrl('api_get_clubs'));
     }
 
     /**
@@ -151,14 +151,14 @@ class ClubController extends AbstractFOSRestController
      * @return View
      */
     public function putRoomAction($id, $slug) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
-        if (!$group || !$room) {
+        if (!$club || !$room) {
             throw $this->createNotFoundException();
         }
 
-        $this->groupOperation->addRoom($group, $room);
-        return $this->redirectView($this->generateUrl('api_get_group', [ 'id' => $group->getId() ]));
+        $this->clubOperation->addRoom($club, $room);
+        return $this->redirectView($this->generateUrl('api_get_club', [ 'id' => $club->getId() ]));
     }
 
     /**
@@ -167,13 +167,13 @@ class ClubController extends AbstractFOSRestController
      * @return View
      */
     public function deleteRoomAction($id, $slug) {
-        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
-        if (!$group || !$room) {
+        if (!$club || !$room) {
             throw $this->createNotFoundException();
         }
 
-        $this->groupOperation->removeRoom($group, $room);
-        return $this->redirectView($this->generateUrl('api_get_groups'));
+        $this->clubOperation->removeRoom($club, $room);
+        return $this->redirectView($this->generateUrl('api_get_clubs'));
     }
 }

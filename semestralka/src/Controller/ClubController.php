@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Club;
 use App\Form\GroupType;
-use App\Service\GroupOperation;
+use App\Service\ClubOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +26,7 @@ class ClubController extends AbstractController
      * ClubController constructor.
      * @param $clubOperation
      */
-    public function __construct(GroupOperation $clubOperation)
+    public function __construct(ClubOperation $clubOperation)
     {
         $this->clubOperation = $clubOperation;
     }

@@ -99,17 +99,17 @@ class Account implements UserInterface
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
-    private $groupManager;
+    private $clubManager;
 
     /**
      * @ORM\ManyToMany(targetEntity="Club", mappedBy="members")
-     * @ORM\JoinTable(name="group_member",
+     * @ORM\JoinTable(name="club_member",
      *      joinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="club_id", referencedColumnName="id")}
      * )
      * @MaxDepth(1)
      */
-    private $groups = [];
+    private $clubs = [];
 
     /**
      * @return array
@@ -238,33 +238,33 @@ class Account implements UserInterface
     /**
      * @return mixed
      */
-    public function getGroupManager()
+    public function getClubManager()
     {
-        return $this->groupManager;
+        return $this->clubManager;
     }
 
     /**
-     * @param mixed $groupManager
+     * @param mixed $clubManager
      */
-    public function setGroupManager($groupManager): void
+    public function setClubManager($clubManager): void
     {
-        $this->groupManager = $groupManager;
+        $this->clubManager = $clubManager;
     }
 
     /**
      * @return array
      */
-    public function getGroups(): array
+    public function getClubs(): array
     {
-        return $this->groups;
+        return $this->clubs;
     }
 
     /**
-     * @param array $groups
+     * @param array $clubs
      */
-    public function setGroups(array $groups): void
+    public function setClubs(array $clubs): void
     {
-        $this->groups = $groups;
+        $this->clubs = $clubs;
     }
 
     public function getId(): ?int

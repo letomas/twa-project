@@ -7,19 +7,18 @@ use App\Entity\Account;
 use App\Entity\Club;
 use App\Entity\Room;
 use Doctrine\ORM\EntityManagerInterface;
-use function Sodium\add;
 
 /**
- * Class GroupOperation
+ * Class ClubOperation
  * @package App\Service
  */
-class GroupOperation
+class ClubOperation
 {
     /** @var EntityManagerInterface */
     protected $em;
 
     /**
-     * GroupOperation constructor.
+     * ClubOperation constructor.
      * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
@@ -28,11 +27,11 @@ class GroupOperation
     }
 
     /**
-     * @param Club $group
+     * @param Club $club
      */
-    public function save(Club $group)
+    public function save(Club $club)
     {
-        $this->em->persist($group);
+        $this->em->persist($club);
         $this->em->flush();
     }
 
@@ -42,71 +41,71 @@ class GroupOperation
     }
 
     /**
-     * @param Club $group
+     * @param Club $club
      */
-    public function remove(Club $group)
+    public function remove(Club $club)
     {
-        $this->em->remove($group);
+        $this->em->remove($club);
         $this->em->flush();
     }
 
-    public function addAccount(Club $group, Account $account)
+    public function addAccount(Club $club, Account $account)
     {
-        $members = $group->getMembers();
+        $members = $club->getMembers();
         if(in_array($account, $members, true)) {
             return;
         }
         $members[] = $account;
-        $groups = $account->getGroups();
-        $groups[] = $group;
+        $clubs = $account->getGroups();
+        $clubs[] = $club;
 
-        $group->setMembers($members);
-        $account->setGroups($groups);
+        $club->setMembers($members);
+        $account->setGroups($clubs);
 
         $this->em->flush();
     }
 
-    public function removeAccount(Club $group, Account $account)
+    public function removeAccount(Club $club, Account $account)
     {
-        $members = $group->getMembers();
+        $members = $club->getMembers();
         if(!in_array($account, $members, true)) {
             return;
         }
-        $groups = $account->getGroups();
+        $clubs = $account->getGroups();
 
         $members = $this->removeObjectFromArray($members, $account);
-        $groups = $this->removeObjectFromArray($groups, $group);
+        $clubs = $this->removeObjectFromArray($clubs, $club);
 
-        $group->setMembers($members);
-        $account->setGroups($groups);
+        $club->setMembers($members);
+        $account->setGroups($clubs);
 
         $this->em->flush();
     }
 
-    public function addRoom(Club $group, Room $room)
+    public function addRoom(Club $club, Room $room)
     {
-        $rooms = $group->getRooms();
+        $rooms = $club->getRooms();
         if(in_array($room, $rooms, TRUE)) {
             return;
         }
         $rooms[] = $room;
 
-        $group->setRooms($rooms);
-        $room->setGroup($group);
+        $club->setRooms($rooms);
+        $room->setGroup($club);
 
         $this->em->flush();
     }
 
-    public function removeRoom(Club $group, Room $room)
+    public function removeRoom(Club $club, Room $room)
     {
-        $rooms = $group->getRooms();
+        $rooms = $club->getRooms();
         if(!in_array($room, $rooms, TRUE)) {
             return;
         }
 
         $this->removeObjectFromArray($rooms, $room);
 
-        $group->setRooms($rooms);
+        $club->setRooms($rooms);
         $room->setGroup(null);
 
         $this->em->flush();
