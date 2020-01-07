@@ -82,6 +82,8 @@ class AccountController extends AbstractController
         }
 
         $form = $this->createForm(AccountCreateType::class, $account);
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

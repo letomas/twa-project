@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% set title = 'Edit {{ account.firstName }} account' %}
+{% set active = '' %}
+{% block section %}
+    <h1>Edit {{ account.firstName }} account</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
