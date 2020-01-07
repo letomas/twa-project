@@ -26,6 +26,8 @@ html {
 body {
     box-sizing: border-box;
     background-color: $color-white-dark;
+    min-height: 100%;
+    padding-bottom: 3rem;
 }
 
 ::selection {

@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Room booking - Building detail
+{% endblock %}
+
+{% block headerNavigation %}
+    <nav>
+        <a href="{{ path( 'index' ) }}">rooms</a>
+        <a href="">bookings</a>
+        <a id="sub-nav-title--manage" href="#">manage</a>
+        <nav id="sub-nav--manage">
+            <a href="{{ path( 'requests' ) }}" >room requests</a>
+            <a href="">room admins</a>
+            <a href="{{ path( 'groups' ) }}">groups</a>
+            <a href="{{ path('rooms') }}">rooms</a>
+            <a href="{{ path( 'buildings' ) }}" id="nav-option--highlighted">buildings</a>
+        </nav>
+        <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+    </nav>
+{% endblock %}
+
+{% block section %}
+    <section class="section-room-detail">
+        <article>
+            <div>
+                <a href="#" class="btn btn--delete">delete</a>
+                <a href="#" class="btn btn--edit">edit</a>
+            </div>
+            <h2>
+                {{  building.name }}
+            </h2>
+            <h3>Street & Street Number</h3>
+            <span>{{  building.street }} & {{ building.streetNumber }}</span>
+            <h3>City</h3>
+            <span>{{ building.city }}</span>
+            <h3>State</h3>
+            <span>{{ building.state }}</span>
+            <h3>Country</h3>
+            <span>{{ building.country }}</span>
+            <h3>Rooms</h3>
+            {% for room in building.rooms %}
+                <span>{{ room.name }}</span>
+            {% endfor %}
+        </article>
+    </section>
+{% endblock %}

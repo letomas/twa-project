@@ -10,6 +10,7 @@
 @import "components/form";
 @import "components/tag";
 
+@import "layout/footer";
 @import "layout/navigation";
 
 @import "pages/account_list";
@@ -18,3 +19,4 @@
 @import "pages/error";
 @import "pages/index";
 
+@import "pages/buildings/buildings_list";

@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}
+    Room Booking - Manage Buldings
+{% endblock %}
+
 {% block headerNavigation %}
     <nav>
         <a href="{{ path( 'index' ) }}">rooms</a>
@@ -17,18 +21,21 @@
 {% endblock %}
 
 {% block section %}
-{#    pridej sem prosim nejaky nazev pro stranku#}
-    <section class="section-list">
+    <section class="section-buildings-list">
+        {% if buildings is empty %}
+            <h2>No building in database</h2>
+        {% endif %}
         {% for building in buildings %}
-{#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
             <article>
                 <h2>
-                    <span>{{ building.name }}</span>
+                    {{ building.name }}
                 </h2>
-                <span><a href="#" class="btn btn--view">view</a></span>
-                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <span><a href="#" class="btn btn-edit">edit</a></span>
-                {% endif %}
+                <div>
+                    <a href="{{ path( 'building_detail', {id: building.id} ) }}" class="btn btn--view">view</a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <a href="{{ path( 'building_edit', {id: building.id} ) }}" class="btn btn--edit">edit</a>
+                    {% endif %}
+                </div>
             </article>
         {% endfor %}
     </section>
