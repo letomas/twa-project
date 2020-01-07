@@ -1,0 +1,45 @@
+.section-buildings-list {
+  max-width: 85rem;
+  margin: 5rem auto 10rem auto;
+
+  & article {
+    position: relative;
+    background-color: $color-white;
+    height: 6rem;
+    width: inherit;
+    margin: 1rem 0 1rem 0;
+    border-radius: 1.8rem;
+    box-shadow: 0 .1rem .6rem rgba($color-black, .2);
+    overflow: hidden;
+    transition: all .1s;
+
+    &:hover {
+      transform: translateY(-.3rem);
+      box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+      &::after {
+        transform: scaleX(1.5) scaleY(1.6);
+        opacity: 0;
+      }
+    }
+
+    & * {
+      display: inline-block;
+    }
+
+    // name
+    & h2 {
+      position: absolute;
+      top: 1.3rem;
+      left: 2.5rem;
+      font-size: 2rem;
+    }
+    // buttons
+    & div {
+      position: absolute;
+      right: 2.5rem;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+}
