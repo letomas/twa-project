@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation\MaxDepth;
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  * @ExclusionPolicy("none")
  */
-class Group
+class Club
 {
     /**
      * @ORM\Id()
@@ -31,7 +31,7 @@ class Group
     private $manageBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="superGroup")
+     * @ORM\ManyToMany(targetEntity="Club", inversedBy="superGroup")
      * @ORM\JoinTable(name = "group_subgroup",
      *     joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="sub_group_id", referencedColumnName="id")}
@@ -41,7 +41,7 @@ class Group
     private $subGroup = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="subGroup")
+     * @ORM\ManyToMany(targetEntity="Club", mappedBy="subGroup")
      * @MaxDepth(1)
      */
     private $superGroup;

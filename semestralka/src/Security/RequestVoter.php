@@ -3,7 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
-use App\Entity\Group;
+use App\Entity\Club;
 use App\Entity\Request;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -128,7 +128,7 @@ class RequestVoter extends Voter
         return false;
     }
 
-    private function isGroupMember(Account $account, Group $group)
+    private function isGroupMember(Account $account, Club $group)
     {
         foreach ($account->getGroups() as $userGroup){
             if($group === $userGroup) {
@@ -155,7 +155,7 @@ class RequestVoter extends Voter
         return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
     }
 
-    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+    private function subgroupsContainGroup(Club $subgroups, Club $group) {
         foreach ($subgroups as $subgroup) {
             if($subgroup === $group) {
                 return true;

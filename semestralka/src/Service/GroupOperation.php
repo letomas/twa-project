@@ -4,7 +4,7 @@
 namespace App\Service;
 
 use App\Entity\Account;
-use App\Entity\Group;
+use App\Entity\Club;
 use App\Entity\Room;
 use Doctrine\ORM\EntityManagerInterface;
 use function Sodium\add;
@@ -28,9 +28,9 @@ class GroupOperation
     }
 
     /**
-     * @param Group $group
+     * @param Club $group
      */
-    public function save(Group $group)
+    public function save(Club $group)
     {
         $this->em->persist($group);
         $this->em->flush();
@@ -42,15 +42,15 @@ class GroupOperation
     }
 
     /**
-     * @param Group $group
+     * @param Club $group
      */
-    public function remove(Group $group)
+    public function remove(Club $group)
     {
         $this->em->remove($group);
         $this->em->flush();
     }
 
-    public function addAccount(Group $group, Account $account)
+    public function addAccount(Club $group, Account $account)
     {
         $members = $group->getMembers();
         if(in_array($account, $members, true)) {
@@ -66,7 +66,7 @@ class GroupOperation
         $this->em->flush();
     }
 
-    public function removeAccount(Group $group, Account $account)
+    public function removeAccount(Club $group, Account $account)
     {
         $members = $group->getMembers();
         if(!in_array($account, $members, true)) {
@@ -83,7 +83,7 @@ class GroupOperation
         $this->em->flush();
     }
 
-    public function addRoom(Group $group, Room $room)
+    public function addRoom(Club $group, Room $room)
     {
         $rooms = $group->getRooms();
         if(in_array($room, $rooms, TRUE)) {
@@ -97,7 +97,7 @@ class GroupOperation
         $this->em->flush();
     }
 
-    public function removeRoom(Group $group, Room $room)
+    public function removeRoom(Club $group, Room $room)
     {
         $rooms = $group->getRooms();
         if(!in_array($room, $rooms, TRUE)) {

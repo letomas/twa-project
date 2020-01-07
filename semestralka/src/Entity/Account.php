@@ -95,14 +95,14 @@ class Account implements UserInterface
     private $roomOccupy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="manageBy")
+     * @ORM\ManyToOne(targetEntity="Club", inversedBy="manageBy")
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
     private $groupManager;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
+     * @ORM\ManyToMany(targetEntity="Club", mappedBy="members")
      * @ORM\JoinTable(name="group_member",
      *      joinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}

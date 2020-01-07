@@ -60,7 +60,7 @@ class Room
     private $requests = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="rooms", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="Club", inversedBy="rooms", fetch="LAZY")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      * @MaxDepth(1)
      */

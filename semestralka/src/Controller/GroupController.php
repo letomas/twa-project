@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Group;
+use App\Entity\Club;
 use App\Form\GroupType;
 use App\Service\GroupOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,7 +36,7 @@ class GroupController extends AbstractController
      */
     public function listAction()
     {
-        $groups = $this->getDoctrine()->getRepository(Group::class)->findAll();
+        $groups = $this->getDoctrine()->getRepository(Club::class)->findAll();
 
         return $this->render('group/index.html.twig', [
             'groups' => $groups,
@@ -51,7 +51,7 @@ class GroupController extends AbstractController
      */
     public function detailAction($id)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
 
         if ($group === null)
         {
@@ -74,7 +74,7 @@ class GroupController extends AbstractController
     public function editAction($id, Request $request)
     {
         $group = $id ?
-            $this->getDoctrine()->getRepository(Group::class)->find($id) : new group();
+            $this->getDoctrine()->getRepository(Club::class)->find($id) : new Club();
 
         if(!$group) {
             throw $this->createNotFoundException();
@@ -115,7 +115,7 @@ class GroupController extends AbstractController
      */
     public function deleteAction($id)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Club::class)->find($id);
 
         if ($group === null)
         {

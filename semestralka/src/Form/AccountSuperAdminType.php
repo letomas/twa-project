@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Account;
-use App\Entity\Group;
+use App\Entity\Club;
 use App\Entity\Request;
 use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,8 +32,8 @@ class AccountSuperAdminType extends AbstractType
                     'User' => 'ROLE_USER',
                     'Room user' => 'ROLE_ROOM_USER',
                     'Room admin' => 'ROLE_ROOM_ADMIN',
-                    'Group member' => 'ROLE_GROUP_MEMBER',
-                    'Group admin' => 'ROLE_GROUP_ADMIN',
+                    'Club member' => 'ROLE_GROUP_MEMBER',
+                    'Club admin' => 'ROLE_GROUP_ADMIN',
                     'Super admin' => 'ROLE_SUPER_ADMIN'
                 ],
                 'required' => true,
@@ -48,11 +48,11 @@ class AccountSuperAdminType extends AbstractType
 //                'multiple' => true, 'required' => false, 'label' => 'Manage rooms: '
 //            ])
 //            ->add('groupManager', EntityType::class, [
-//                'class' => Group::class, 'choice_label' => 'name',
+//                'class' => Club::class, 'choice_label' => 'name',
 //                'multiple' => false, 'required' => false, 'label' => 'Manage group: '
 //            ])
 //            ->add('groups', EntityType::class, [
-//                'class' => Group::class, 'choice_label' => 'name',
+//                'class' => Club::class, 'choice_label' => 'name',
 //                'multiple' => true, 'required' => false, 'label' => 'Member of groups: '
 //            ])
             ->add( 'submit', SubmitType::class, ['label' => 'Save'])
