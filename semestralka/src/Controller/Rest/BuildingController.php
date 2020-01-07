@@ -52,4 +52,15 @@ class BuildingController extends AbstractFOSRestController
 
         return $building;
     }
+
+    public function deleteAction($id)
+    {        
+        $building = $this->getDoctrine()->getRepository(Building::class)->find($id);
+        if (!$building) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->buildingOperation->remove($building);
+        return $this->redirectView($this->generateUrl('api_get_buildings'));
+    }
 }

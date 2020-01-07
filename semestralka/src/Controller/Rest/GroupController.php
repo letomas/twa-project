@@ -52,4 +52,15 @@ class GroupController extends AbstractFOSRestController
 
         return $group;
     }
+
+    public function deleteAction($id)
+    {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->groupOperation->remove($group);
+        return $this->redirectView($this->generateUrl('api_get_groups'));
+    }
 }

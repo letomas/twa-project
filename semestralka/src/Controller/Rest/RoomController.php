@@ -52,4 +52,15 @@ class RoomController extends AbstractFOSRestController
 
         return $room;
     }
+
+    public function deleteAction($id)
+    {
+        $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
+        if (!$room) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->roomOperation->remove($room);
+        return $this->redirectView($this->generateUrl('api_get_rooms'));
+    }
 }

@@ -52,4 +52,15 @@ class RequestController extends AbstractFOSRestController
 
         return $request;
     }
+
+    public function deleteAction($id)
+    {
+        $request = $this->getDoctrine()->getRepository(Request::class)->find($id);
+        if (!$request) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->requestOperation->remove($request);
+        return $this->redirectView($this->generateUrl('api_get_requests'));
+    }
 }

@@ -59,4 +59,15 @@ class AccountController extends AbstractFOSRestController
 
         return $account;
     }
+
+    public function deleteAction($id)
+    {
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if (!$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->accountOperation->remove($account);
+        return $this->redirectView($this->generateUrl('api_get_accounts'));
+    }
 }
