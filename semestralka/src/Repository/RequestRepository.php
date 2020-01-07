@@ -19,6 +19,16 @@ class RequestRepository extends ServiceEntityRepository
         parent::__construct($registry, Request::class);
     }
 
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('request');
+        if ($filter) {
+            $qb->andWhere('request.createBy LIKE :filter OR request.id LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb;
+    }
+
     // /**
     //  * @return Request[] Returns an array of Request objects
     //  */

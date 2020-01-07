@@ -20,4 +20,14 @@ class BuildingRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Building::class);
     }
+
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('building');
+        if ($filter) {
+            $qb->andWhere('building.city LIKE :filter OR building.street LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb;
+    }
 }
