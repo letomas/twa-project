@@ -21,13 +21,16 @@ use Symfony\Component\Form\FormInterface;
  */
 class AccountController extends AbstractFOSRestController
 {
+    /**
+     * @var AccountOperation
+     */
     protected $accountOperation;
 
     /**
      * AccountController constructor.
      * @param $accountOperation
      */
-    public function __construct($accountOperation)
+    public function __construct(AccountOperation $accountOperation)
     {
         $this->accountOperation = $accountOperation;
     }
