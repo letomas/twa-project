@@ -64,7 +64,8 @@ h2 {
   cursor: pointer;
   font-family: "Nunito", sans-serif;
   font-size: 1.6rem;
-  line-height: 1.7rem; }
+  line-height: 1.7rem;
+  margin: 0 .3rem 0 .3rem; }
 
 .btn--view {
   background-color: #fff;
@@ -287,74 +288,30 @@ form select {
       text-align: center;
       font-family: "Nunito", sans-serif; }
 
-.section-employee-detail {
+.section-room-detail {
   max-width: 85rem;
-  margin: 10rem auto 10rem auto; }
-  .section-employee-detail article {
+  margin: 5rem auto 10rem auto; }
+  .section-room-detail article {
     position: relative;
     width: inherit;
     background-color: #fff;
     border-radius: 2.5rem;
     box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
-    padding: 7rem 10rem 7rem 10rem; }
+    padding: 6rem 5rem 5rem 5rem; }
     @media only screen and (max-width: 37.5em) {
-      .section-employee-detail article {
+      .section-room-detail article {
         padding: 3rem 5rem 3rem 5rem; } }
-    .section-employee-detail article img {
-      height: 17rem;
-      width: 17rem;
-      border-radius: 2.5rem;
-      box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2); }
-    .section-employee-detail article h2 {
+    .section-room-detail article div {
       position: absolute;
-      top: 10rem;
-      left: 34rem;
-      font-family: "Josefin Sans", sans-serif;
+      right: 5rem;
+      top: 3rem; }
+    .section-room-detail article h3 {
+      font-size: 1.2rem;
+      margin-top: 1rem; }
+    .section-room-detail article span {
       color: #707070; }
-      @media only screen and (max-width: 28.75em) {
-        .section-employee-detail article h2 {
-          left: 25rem; } }
-    .section-employee-detail article span:nth-child(3) {
-      position: absolute;
-      top: 15rem;
-      left: 34rem;
-      font-weight: 800; }
-      @media only screen and (max-width: 28.75em) {
-        .section-employee-detail article span:nth-child(3) {
-          left: 25rem; } }
-    .section-employee-detail article span:nth-child(4) {
-      position: absolute;
-      top: 18rem;
-      left: 34rem;
-      font-weight: 800; }
-      @media only screen and (max-width: 28.75em) {
-        .section-employee-detail article span:nth-child(4) {
-          left: 25rem; } }
-    .section-employee-detail article a:nth-child(6) {
-      position: absolute;
-      right: 10rem;
-      top: 7rem; }
-      @media only screen and (max-width: 37.5em) {
-        .section-employee-detail article a:nth-child(6) {
-          right: 5rem;
-          top: 3rem; } }
-    .section-employee-detail article a:nth-child(5) {
-      position: absolute;
-      right: 18rem;
-      top: 7rem; }
-      @media only screen and (max-width: 37.5em) {
-        .section-employee-detail article a:nth-child(5) {
-          right: 13rem;
-          top: 3rem; } }
-    .section-employee-detail article h3:nth-child(7) {
-      margin-top: 6rem;
-      margin-bottom: 3rem; }
-    .section-employee-detail article h3:nth-child(9) {
-      margin-top: 4rem;
-      margin-bottom: 3rem; }
-
-#nav-option-edit-highlighted {
-  color: #FB9D4C; }
+    .section-room-detail article p {
+      color: #707070; }
 
 .section-employee-edit {
   max-width: 85rem;
@@ -434,6 +391,38 @@ form select {
         .section-list article span:nth-child(3) {
           display: none; } }
     .section-list article a {
+      position: absolute;
+      right: 2.5rem;
+      top: 50%;
+      transform: translate(0, -50%); }
+
+.section-buildings-list {
+  max-width: 85rem;
+  margin: 5rem auto 10rem auto; }
+  .section-buildings-list article {
+    position: relative;
+    background-color: #fff;
+    height: 6rem;
+    width: inherit;
+    margin: 1rem 0 1rem 0;
+    border-radius: 1.8rem;
+    box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all .1s; }
+    .section-buildings-list article:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+      .section-buildings-list article:hover::after {
+        transform: scaleX(1.5) scaleY(1.6);
+        opacity: 0; }
+    .section-buildings-list article * {
+      display: inline-block; }
+    .section-buildings-list article h2 {
+      position: absolute;
+      top: 1.3rem;
+      left: 2.5rem;
+      font-size: 2rem; }
+    .section-buildings-list article div {
       position: absolute;
       right: 2.5rem;
       top: 50%;

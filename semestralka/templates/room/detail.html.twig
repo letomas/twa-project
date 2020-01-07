@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Room detail
+{% endblock %}
+
+{% block headerNavigation %}
+    <nav>
+        <a href="{{ path( 'index' ) }}">rooms</a>
+        <a href="">bookings</a>
+        <a id="sub-nav-title--manage" href="#">manage</a>
+        <nav id="sub-nav--manage">
+            <a href="{{ path( 'requests' ) }}" >room requests</a>
+            <a href="">room admins</a>
+            <a href="{{ path( 'groups' ) }}">groups</a>
+            <a href="{{ path('rooms') }}"  id="nav-option--highlighted">rooms</a>
+            <a href="{{ path( 'buildings' ) }}">buildings</a>
+        </nav>
+        <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+    </nav>
+{% endblock %}
+
+{% block section %}
+    <section class="section-room-detail">
+        <article>
+            <div>
+                <a href="#" class="btn btn--delete">delete</a>
+                <a href="#" class="btn btn--edit">edit</a>
+            </div>
+            <h2>
+                Room Name
+            </h2>
+            <h3>Room Type</h3>
+            <span>room type</span>
+            <h3>Capacity</h3>
+            <span>capacity</span>
+            <h3>Admin</h3>
+            <span>admin username</span>
+            <h3>Description</h3>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit distinctio cupiditate nisi. Quia non saepe facilis commodi asperiores eos. Mollitia id ipsum assumenda velit aut, magni illo illum cupiditate quibusdam!
+            </p>
+        </article>
+    </section>
+{% endblock %}
