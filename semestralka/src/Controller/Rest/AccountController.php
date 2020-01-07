@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormInterface;
 
 
 /**
- * Class EmployeeController
+ * Class AccountController
  * @package App\Controller\Rest
  * @Rest\NamePrefix("api_")
  * @Rest\RouteResource("Account")
