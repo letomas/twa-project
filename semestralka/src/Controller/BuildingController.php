@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Building;
+use App\Form\BuildingType;
 use App\Service\BuildingOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -66,42 +68,43 @@ class BuildingController extends AbstractController
      * @Route("/edit/{id}", name="building_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param $request
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $request)
     {
         $building = $id ?
             $this->getDoctrine()->getRepository(Building::class)->find($id) : new Building();
+
         if(!$building) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(BuildingType::class, $building);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->buildingOperation->update();
-                } else {
-                    $this->buildingOperation->save($building);
-                }
+        $form = $this->createForm(BuildingType::class, $building);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('building_detail', [
-                    'id' => $building->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('building/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'building' => $building,
-                ]);
+                $this->buildingOperation->update();
             } else {
-                return $this->render('building/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->buildingOperation->save($building);
             }
-        */
+
+            return $this->redirectToRoute('building_detail', [
+                'id' => $building->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('building/edit.html.twig', [
+                'form' => $form->createView(),
+                'building' => $building,
+            ]);
+        } else {
+            return $this->render('building/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
 
         return $this->redirectToRoute('buildings');
     }
