@@ -7,6 +7,7 @@ use App\Entity\Request;
 use App\Service\RequestOperation;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Class RequestController
@@ -28,9 +29,10 @@ class RequestController extends AbstractFOSRestController
         $this->requestOperation = $requestOperation;
     }
 
-    public function cgetAction ()
+    public function cgetAction (HttpRequest $request)
     {
-        $requests = $this->getDoctrine()->getRepository(Request::class)->findAll();
+        $filter = $request->query->get('filter');
+        $requests = $this->getDoctrine()->getRepository(Request::class)->findAllQueryBuilder($filter);
         if(!$requests) {
             throw $this->createNotFoundException();
         }

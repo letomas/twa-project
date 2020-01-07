@@ -9,6 +9,7 @@ use App\Entity\Room;
 use App\Service\GroupOperation;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GroupController
@@ -30,9 +31,10 @@ class GroupController extends AbstractFOSRestController
         $this->groupOperation = $groupOperation;
     }
 
-    public function cgetAction ()
+    public function cgetAction (Request $request)
     {
-        $groups = $this->getDoctrine()->getRepository(Group::class)->findAll();
+        $filter = $request->query->get('filter');
+        $groups = $this->getDoctrine()->getRepository(Group::class)->findAllQueryBuilder($filter);
         if(!$groups) {
             throw $this->createNotFoundException();
         }

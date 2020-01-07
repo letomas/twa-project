@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -35,9 +36,10 @@ class AccountController extends AbstractFOSRestController
         $this->accountOperation = $accountOperation;
     }
 
-    public function cgetAction ()
+    public function cgetAction (Request $request)
     {
-        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
+        $filter = $request->query->get('filter');
+        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAllQueryBuilder($filter);
         if(!$accounts) {
             throw $this->createNotFoundException();
         }
