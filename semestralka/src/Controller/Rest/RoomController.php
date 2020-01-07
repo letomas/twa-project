@@ -5,8 +5,10 @@ namespace App\Controller\Rest;
 
 use App\Entity\Room;
 use App\Service\RoomOperation;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,6 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RoomController extends AbstractFOSRestController
 {
+    /**
+     * @var RoomOperation
+     */
     protected $roomOperation;
 
     /**
@@ -29,6 +34,10 @@ class RoomController extends AbstractFOSRestController
         $this->roomOperation = $roomOperation;
     }
 
+    /**
+     * @param Request $request
+     * @return QueryBuilder
+     */
     public function cgetAction (Request $request)
     {
         $filter = $request->query->get('filter');
@@ -55,6 +64,10 @@ class RoomController extends AbstractFOSRestController
         return $room;
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function deleteAction($id)
     {
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);

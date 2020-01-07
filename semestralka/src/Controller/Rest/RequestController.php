@@ -6,9 +6,12 @@ namespace App\Controller\Rest;
 use App\Entity\Request;
 use App\Form\RequestType;
 use App\Service\RequestOperation;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
@@ -20,6 +23,9 @@ use Symfony\Component\HttpFoundation\Request as HttpRequest;
  */
 class RequestController extends AbstractFOSRestController
 {
+    /**
+     * @var RequestOperation
+     */
     protected $requestOperation;
 
     /**
@@ -31,6 +37,10 @@ class RequestController extends AbstractFOSRestController
         $this->requestOperation = $requestOperation;
     }
 
+    /**
+     * @param HttpRequest $request
+     * @return QueryBuilder
+     */
     public function cgetAction (HttpRequest $request)
     {
         $filter = $request->query->get('filter');
@@ -57,6 +67,16 @@ class RequestController extends AbstractFOSRestController
         return $request;
     }
 
+    /**
+     * @param $id
+     * @param ParamFetcherInterface $fetcher
+     * @return View|FormInterface
+     *
+     * @Rest\RequestParam(name="start")
+     * @Rest\RequestParam(name="end")
+     * @Rest\RequestParam(name="attendees")
+     * @Rest\RequestParam(name="room")
+     */
     public function putAction($id, ParamFetcherInterface $fetcher) {
         $request = $this->getDoctrine()->getRepository(Request::class)->find($id);
         if (!$request) {
@@ -76,6 +96,10 @@ class RequestController extends AbstractFOSRestController
         return $this->redirectView($this->generateUrl('api_get_request', [ 'id' => $request->getId() ]));
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function deleteAction($id)
     {
         $request = $this->getDoctrine()->getRepository(Request::class)->find($id);

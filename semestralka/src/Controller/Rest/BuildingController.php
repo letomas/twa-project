@@ -5,8 +5,10 @@ namespace App\Controller\Rest;
 
 use App\Entity\Building;
 use App\Service\BuildingOperation;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,6 +20,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BuildingController extends AbstractFOSRestController
 {
+    /**
+     * @var BuildingOperation
+     */
     protected $buildingOperation;
 
     /**
@@ -29,6 +34,10 @@ class BuildingController extends AbstractFOSRestController
         $this->buildingOperation = $buildingOperation;
     }
 
+    /**
+     * @param Request $request
+     * @return QueryBuilder
+     */
     public function cgetAction (Request $request)
     {
         $filter = $request->query->get('filter');
@@ -55,6 +64,10 @@ class BuildingController extends AbstractFOSRestController
         return $building;
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function deleteAction($id)
     {        
         $building = $this->getDoctrine()->getRepository(Building::class)->find($id);
