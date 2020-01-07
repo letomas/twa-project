@@ -12,13 +12,13 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
 
 /**
- * Class GroupController
+ * Class ClubController
  * @package App\Controller\Rest
  * @Rest\NamePrefix("api_")
  * @Rest\RouteResource("Club")
  * @Rest\View(serializerEnableMaxDepthChecks=true)
  */
-class GroupController extends AbstractFOSRestController
+class ClubController extends AbstractFOSRestController
 {
     /**
      * @var GroupOperation
@@ -26,7 +26,7 @@ class GroupController extends AbstractFOSRestController
     protected $groupOperation;
 
     /**
-     * GroupController constructor.
+     * ClubController constructor.
      * @param $groupOperation
      */
     public function __construct(GroupOperation $groupOperation)
