@@ -3,7 +3,9 @@
 
 namespace App\Controller\Rest;
 
+use App\Entity\Account;
 use App\Entity\Group;
+use App\Entity\Room;
 use App\Service\GroupOperation;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -61,6 +63,50 @@ class GroupController extends AbstractFOSRestController
         }
 
         $this->groupOperation->remove($group);
+        return $this->redirectView($this->generateUrl('api_get_groups'));
+    }
+
+    public function putAccountAction($id, $slug) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if (!$group || !$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->groupOperation->addAccount($group, $account);
+        return $this->redirectView($this->generateUrl('api_get_groups'));
+    }
+
+    public function deleteAccountAction($id, $slug) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if (!$group || !$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->groupOperation->removeAccount($group, $account);
+        return $this->redirectView($this->generateUrl('api_get_groups'));
+    }
+
+    public function putRoomAction($id, $slug) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
+        if (!$group || !$room) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->groupOperation->addRoom($group, $room);
+        return $this->redirectView($this->generateUrl('api_get_groups'));
+    }
+
+    public function deleteRoomAction($id, $slug) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
+        if (!$group || !$room) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->groupOperation->removeRoom($group, $room);
         return $this->redirectView($this->generateUrl('api_get_groups'));
     }
 }
