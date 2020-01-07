@@ -19,6 +19,16 @@ class GroupRepository extends ServiceEntityRepository
         parent::__construct($registry, Group::class);
     }
 
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('group');
+        if ($filter) {
+            $qb->andWhere('group.name LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb;
+    }
+
     // /**
     //  * @return Group[] Returns an array of Group objects
     //  */

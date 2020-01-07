@@ -19,4 +19,14 @@ class RoomRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Room::class);
     }
+
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('room');
+        if ($filter) {
+            $qb->andWhere('room.name LIKE :filter OR room.type LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb;
+    }
 }

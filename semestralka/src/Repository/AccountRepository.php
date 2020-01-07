@@ -19,6 +19,16 @@ class AccountRepository extends ServiceEntityRepository
         parent::__construct($registry, Account::class);
     }
 
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('account');
+        if ($filter) {
+            $qb->andWhere('account.firstName LIKE :filter OR account.lastName LIKE :filter OR account.email LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        return $qb;
+    }
+
     // /**
     //  * @return Account[] Returns an array of Account objects
     //  */
