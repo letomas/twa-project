@@ -3,7 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Account;
-use App\Entity\Group;
+use App\Entity\Club;
 use App\Entity\Room;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -78,7 +78,7 @@ class RoomVoter extends Voter
     // jenom kdyz je groupAdmin danne mistnosti
     private function canEdit(Account $account, Room $room)
     {
-        return $this->isRoomGroupAdmin($account, $room);
+        return $this->isRoomClubAdmin($account, $room);
     }
 
     // pouze super admin
@@ -93,23 +93,23 @@ class RoomVoter extends Voter
         return false;
     }
 
-    private function isRoomGroupAdmin(Account $account, Room $room)
+    private function isRoomClubAdmin(Account $account, Room $room)
     {
-        $roomGroup = $room->getGroup();
-        $groupManagedByAccount = $account->getGroupManager();
+        $roomClub = $room->getClub();
+        $groupManagedByAccount = $account->getClubManager();
 
         if(!$groupManagedByAccount) {
             return false;
         }
 
-        if($roomGroup === $groupManagedByAccount) {
+        if($roomClub === $groupManagedByAccount) {
             return true;
         }
 
-        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+        return $this->subgroupsContainClub($groupManagedByAccount->getSubClub(), $roomClub);
     }
 
-    private function subgroupsContainGroup(Group $subgroups, Group $group) {
+    private function subgroupsContainClub(Club $subgroups, Club $group) {
         foreach ($subgroups as $subgroup) {
             if($subgroup === $group) {
                 return true;

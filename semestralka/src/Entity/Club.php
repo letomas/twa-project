@@ -7,10 +7,10 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ClubRepository")
  * @ExclusionPolicy("none")
  */
-class Group
+class Club
 {
     /**
      * @ORM\Id()
@@ -25,31 +25,31 @@ class Group
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Account", mappedBy="groupManager", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Account", mappedBy="clubManager", cascade={"persist"})
      * @MaxDepth(1)
      */
     private $manageBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", inversedBy="superGroup")
-     * @ORM\JoinTable(name = "group_subgroup",
-     *     joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="sub_group_id", referencedColumnName="id")}
+     * @ORM\ManyToMany(targetEntity="Club", inversedBy="superClub")
+     * @ORM\JoinTable(name = "club_subclub",
+     *     joinColumns={@ORM\JoinColumn(name="club_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="sub_club_id", referencedColumnName="id")}
      * )
      * @MaxDepth(1)
      */
-    private $subGroup = [];
+    private $subClub = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="subGroup")
+     * @ORM\ManyToMany(targetEntity="Club", mappedBy="subClub")
      * @MaxDepth(1)
      */
-    private $superGroup;
+    private $superClub;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Account", inversedBy="groups")
-     * @ORM\JoinTable(name="group_member",
-     *      joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     * @ORM\ManyToMany(targetEntity="Account", inversedBy="clubs")
+     * @ORM\JoinTable(name="club_member",
+     *      joinColumns={@ORM\JoinColumn(name="club_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")}
      * )
      * @MaxDepth(1)
@@ -57,7 +57,7 @@ class Group
     private $members = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="Room", mappedBy="group")
+     * @ORM\OneToMany(targetEntity="Room", mappedBy="club")
      * @MaxDepth(1)
      */
     private $rooms = [];
@@ -81,33 +81,33 @@ class Group
     /**
      * @return array
      */
-    public function getSubGroup(): array
+    public function getSubClub(): array
     {
-        return $this->subGroup;
+        return $this->subClub;
     }
 
     /**
-     * @param array $subGroup
+     * @param array $subClub
      */
-    public function setSubGroup(array $subGroup): void
+    public function setSubClub(array $subClub): void
     {
-        $this->subGroup = $subGroup;
+        $this->subClub = $subClub;
     }
 
     /**
      * @return mixed
      */
-    public function getSuperGroup()
+    public function getSuperClub()
     {
-        return $this->superGroup;
+        return $this->superClub;
     }
 
     /**
-     * @param mixed $superGroup
+     * @param mixed $superClub
      */
-    public function setSuperGroup($superGroup): void
+    public function setSuperClub($superClub): void
     {
-        $this->superGroup = $superGroup;
+        $this->superClub = $superClub;
     }
 
     /**

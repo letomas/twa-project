@@ -90,12 +90,12 @@ class AccountController extends AbstractFOSRestController
             throw $this->createNotFoundException();
         }
 
-        $groups = $account->getRequestAuthor();
-        if(!$groups) {
+        $clubs = $account->getRequestAuthor();
+        if(!$clubs) {
             throw $this->createNotFoundException();
         }
 
-        return $groups;
+        return $clubs;
     }
 
     /**
@@ -108,12 +108,12 @@ class AccountController extends AbstractFOSRestController
             throw $this->createNotFoundException();
         }
 
-        $groups = $account->getRequestAuthor();
-        if(!$groups) {
+        $clubs = $account->getRequestAuthor();
+        if(!$clubs) {
             throw $this->createNotFoundException();
         }
 
-        return $groups;
+        return $clubs;
     }
 
     /**
