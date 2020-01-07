@@ -54,8 +54,7 @@ class RoomController extends AbstractController
     {
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
 
-        if ($room === null)
-        {
+        if ($room === null) {
             throw $this->createNotFoundException();
         }
 

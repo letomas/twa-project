@@ -24,8 +24,12 @@
     <section class="section-room-detail">
         <article>
             <div>
-                <a href="#" class="btn btn--delete">delete</a>
-                <a href="#" class="btn btn--edit">edit</a>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="#" class="btn btn--delete">delete</a>
+                {% endif %}
+                {% if is_granted('edit', room) or is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="#" class="btn btn--edit">edit</a>
+                {% endif %}
             </div>
             <h2>
                 {{ room.name }}
