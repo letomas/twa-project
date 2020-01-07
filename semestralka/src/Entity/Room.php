@@ -30,6 +30,16 @@ class Room
     private $type;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $capacity;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $description;
+
+    /**
      * @ORM\ManyToOne(fetch="LAZY", targetEntity="Building", inversedBy="rooms")
      * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
      * @MaxDepth(1)
@@ -65,6 +75,38 @@ class Room
      * @MaxDepth(1)
      */
     private $club;
+
+    /**
+     * @return mixed
+     */
+    public function getCapacity()
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param mixed $capacity
+     */
+    public function setCapacity($capacity): void
+    {
+        $this->capacity = $capacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
 
     /**
      * @return mixed

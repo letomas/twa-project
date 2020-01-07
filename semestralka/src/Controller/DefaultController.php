@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Room;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,6 +17,10 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        return $this->render('index.html.twig');
+        $rooms = $this->getDoctrine()->getRepository(Room::class)->findAll();
+
+        return $this->render('index.html.twig', [
+            'rooms' => $rooms,
+        ]);
     }
 }

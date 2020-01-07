@@ -80,4 +80,17 @@
             box-shadow: 0 1rem 2rem rgba($color-red-dark, .2);
         }
     }
+
+    &--approve {
+        background-color: $color-green-light;
+        border: 1px solid $color-green;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-green, .2);
+
+        &:hover {
+            background-color: $color-white;
+            color: $color-green;
+            box-shadow: 0 1rem 2rem rgba($color-green, .2);
+        }
+    }
 }

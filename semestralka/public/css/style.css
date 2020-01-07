@@ -119,6 +119,16 @@ h2 {
     color: #F62222;
     box-shadow: 0 1rem 2rem rgba(246, 34, 34, 0.2); }
 
+.btn--approve {
+  background-color: #7ed56f;
+  border: 1px solid #55c57a;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(85, 197, 122, 0.2); }
+  .btn--approve:hover {
+    background-color: #fff;
+    color: #55c57a;
+    box-shadow: 0 1rem 2rem rgba(85, 197, 122, 0.2); }
+
 .form__group:not(:last-child) {
   margin-top: 2rem; }
 
@@ -298,10 +308,10 @@ footer {
       text-align: center;
       font-family: "Nunito", sans-serif; }
 
-.section-room-detail {
+.section-detail {
   max-width: 85rem;
   margin: 5rem auto 10rem auto; }
-  .section-room-detail article {
+  .section-detail article {
     position: relative;
     width: inherit;
     background-color: #fff;
@@ -309,18 +319,18 @@ footer {
     box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
     padding: 6rem 5rem 5rem 5rem; }
     @media only screen and (max-width: 37.5em) {
-      .section-room-detail article {
+      .section-detail article {
         padding: 3rem 5rem 3rem 5rem; } }
-    .section-room-detail article div {
+    .section-detail article div {
       position: absolute;
       right: 5rem;
       top: 3rem; }
-    .section-room-detail article h3 {
+    .section-detail article h3 {
       font-size: 1.2rem;
       margin-top: 1rem; }
-    .section-room-detail article span {
+    .section-detail article span {
       color: #707070; }
-    .section-room-detail article p {
+    .section-detail article p {
       color: #707070; }
 
 .section-employee-edit {
