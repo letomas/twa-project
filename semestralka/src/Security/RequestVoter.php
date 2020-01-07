@@ -97,7 +97,7 @@ class RequestVoter extends Voter
     private function canAdd(Account $account, Request $request)
     {
         $room = $request->getRoom();
-        $group = $room->getGroup();
+        $club = $room->getGroup();
         // mistnosti jejiz jsem uzivatelem
         foreach ($account->getRoomOccupy() as $occupiedRoom){
             if ($occupiedRoom === $room){
@@ -105,7 +105,7 @@ class RequestVoter extends Voter
             }
         }
 
-        return ($this->isGroupMember($account, $group)
+        return ($this->isGroupMember($account, $club)
             || $this->isRoomAdmin($account, $room)
             || $this->isRoomGroupAdmin($account, $room));
     }
@@ -128,10 +128,10 @@ class RequestVoter extends Voter
         return false;
     }
 
-    private function isGroupMember(Account $account, Club $group)
+    private function isGroupMember(Account $account, Club $club)
     {
         foreach ($account->getGroups() as $userGroup){
-            if($group === $userGroup) {
+            if($club === $userGroup) {
                 return true;
             }
         }
@@ -142,22 +142,22 @@ class RequestVoter extends Voter
     private function isRoomGroupAdmin(Account $account, Room $room)
     {
         $roomGroup = $room->getGroup();
-        $groupManagedByAccount = $account->getGroupManager();
+        $clubManagedByAccount = $account->getGroupManager();
 
-        if(!$groupManagedByAccount) {
+        if(!$clubManagedByAccount) {
             return false;
         }
 
-        if($roomGroup === $groupManagedByAccount) {
+        if($roomGroup === $clubManagedByAccount) {
             return true;
         }
 
-        return $this->subgroupsContainGroup($groupManagedByAccount->getSubGroup(), $roomGroup);
+        return $this->subclubsContainGroup($clubManagedByAccount->getSubGroup(), $roomGroup);
     }
 
-    private function subgroupsContainGroup(Club $subgroups, Club $group) {
-        foreach ($subgroups as $subgroup) {
-            if($subgroup === $group) {
+    private function subclubsContainGroup(Club $subclubs, Club $club) {
+        foreach ($subclubs as $subclub) {
+            if($subclub === $club) {
                 return true;
             }
         }
