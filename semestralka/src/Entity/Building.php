@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BuildingRepository")
+ * @ExclusionPolicy("none")
  */
 class Building
 {
@@ -53,7 +56,7 @@ class Building
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Room", mappedBy="building", cascade={"remove", "persist"})
-     * @\Symfony\Component\Serializer\Annotation\MaxDepth(1)
+     * @MaxDepth(1)
      */
     private $rooms = [];
 
