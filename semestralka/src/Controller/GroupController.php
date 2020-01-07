@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Group;
+use App\Form\GroupType;
 use App\Service\GroupOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,35 +77,32 @@ class GroupController extends AbstractController
         if(!$group) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(GroupType::class, $group);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->groupOperation->update();
-                } else {
-                    $this->groupOperation->save($group);
-                }
+        $form = $this->createForm(GroupType::class, $group);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('group_detail', [
-                    'id' => $group->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('group/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'group' => $group,
-                ]);
+                $this->groupOperation->update();
             } else {
-                return $this->render('group/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->groupOperation->save($group);
             }
-        */
 
-        return $this->redirectToRoute('groups');
+            return $this->redirectToRoute('group_detail', [
+                'id' => $group->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('group/edit.html.twig', [
+                'form' => $form->createView(),
+                'group' => $group,
+            ]);
+        } else {
+            return $this->render('group/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
     /**

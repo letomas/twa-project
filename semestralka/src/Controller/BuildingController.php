@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Building;
+use App\Form\BuildingType;
 use App\Service\BuildingOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,35 +76,32 @@ class BuildingController extends AbstractController
         if(!$building) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(BuildingType::class, $building);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->buildingOperation->update();
-                } else {
-                    $this->buildingOperation->save($building);
-                }
+        $form = $this->createForm(BuildingType::class, $building);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('building_detail', [
-                    'id' => $building->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('building/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'building' => $building,
-                ]);
+                $this->buildingOperation->update();
             } else {
-                return $this->render('building/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->buildingOperation->save($building);
             }
-        */
 
-        return $this->redirectToRoute('buildings');
+            return $this->redirectToRoute('building_detail', [
+                'id' => $building->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('building/edit.html.twig', [
+                'form' => $form->createView(),
+                'building' => $building,
+            ]);
+        } else {
+            return $this->render('building/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
     /**

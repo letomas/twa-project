@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Account;
+use App\Form\AccountSuperAdminType;
 use App\Service\AccountOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,35 +77,32 @@ class AccountController extends AbstractController
         if(!$account) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(AccountSuperAdminType::class, $account);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->accountOperation->update();
-                } else {
-                    $this->accountOperation->save($account)
-                }
+        $form = $this->createForm(AccountSuperAdminType::class, $account);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('account_detail', [
-                    'id' => $account->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('account/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'account' => $account,
-                ]);
+                $this->accountOperation->update();
             } else {
-                return $this->render('account/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->accountOperation->save($account);
             }
-        */
 
-        return $this->redirectToRoute('accounts');
+            return $this->redirectToRoute('account_detail', [
+                'id' => $account->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('account/edit.html.twig', [
+                'form' => $form->createView(),
+                'account' => $account,
+            ]);
+        } else {
+            return $this->render('account/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
     /**

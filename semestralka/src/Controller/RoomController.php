@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Room;
+use App\Form\RoomType;
 use App\Service\RoomOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,35 +77,32 @@ class RoomController extends AbstractController
         if(!$room) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(RoomType::class, $room);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->roomOperation->update();
-                } else {
-                    $this->roomOperation->save($room);
-                }
+        $form = $this->createForm(RoomType::class, $room);
+        $form->handleRequest($request);
 
-                return $this->redirectToRoute('room_detail', [
-                    'id' => $room->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('room/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'room' => $room,
-                ]);
+                $this->roomOperation->update();
             } else {
-                return $this->render('room/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->roomOperation->save($room);
             }
-        */
 
-        return $this->redirectToRoute('rooms');
+            return $this->redirectToRoute('room_detail', [
+                'id' => $room->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('room/edit.html.twig', [
+                'form' => $form->createView(),
+                'room' => $room,
+            ]);
+        } else {
+            return $this->render('room/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
     /**
