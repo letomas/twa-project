@@ -21,10 +21,11 @@
 {% endblock %}
 
 {% block section %}
-{#    pridej sem prosim nejaky nazev pro stranku#}
     <section class="section-buildings-list">
+        {% if buildings is empty %}
+            <h2>No building in database</h2>
+        {% endif %}
         {% for building in buildings %}
-{#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
             <article>
                 <h2>
                     {{ building.name }}
