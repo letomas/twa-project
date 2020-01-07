@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block section %}
-    <section class="section-buildings-list">
+    <section class="section-list">
         {% if buildings is empty %}
             <h2>No building in database</h2>
         {% endif %}
@@ -14,7 +14,7 @@
                 <h2>
                     {{ building.name }}
                 </h2>
-                <div>
+                <div class="section-list__buttons">
                     <a href="{{ path( 'building_detail', {id: building.id} ) }}" class="btn btn--view">view</a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <a href="{{ path( 'building_edit', {id: building.id} ) }}" class="btn btn--edit">edit</a>

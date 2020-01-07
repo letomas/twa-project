@@ -17,29 +17,6 @@
 {% endblock %}
 
 {% block section %}
-{#    <section class="section-list">#}
-{#        <article>#}
-{#            <h2>#}
-{#                <span>room name</span>#}
-{#            </h2>#}
-{#            <span class="tag tag--capacity">capacity</span>#}
-{#            <span class="tag tag--room-type">#}
-{#                    room type#}
-{#                </span>#}
-{#            <a href="#" class="btn btn--view">book</a>#}
-{#        </article>#}
-    <section class="section-list">
-        <article>
-            <h2>
-                <span>room name</span>
-            </h2>
-            <div>
-                <span class="tag tag--capacity">capacity</span>
-                <span class="tag tag--room-type">room type</span>
-                <a href="#" class="btn btn--view">view</a>
-            </div>
-        </article>
-
         {% if rooms is empty %}
             <h2>No room in database</h2>
         {% endif %}

@@ -399,11 +399,16 @@ footer {
       top: 1.3rem;
       left: 2.5rem;
       font-size: 2rem; }
-    .section-list article div {
-      position: absolute;
-      right: 2.5rem;
-      top: 50%;
-      transform: translate(0, -50%); }
+  .section-list__tags {
+    position: absolute;
+    right: 30rem;
+    top: 50%;
+    transform: translate(0, -50%); }
+  .section-list__buttons {
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translate(0, -50%); }
 
 .section-buildings-list {
   max-width: 85rem;
