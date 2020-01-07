@@ -38,6 +38,7 @@ html {
       font-size: 50%; } }
 
 body {
+  position: relative;
   box-sizing: border-box;
   background-color: #f8f8f8;
   min-height: 100%;
@@ -158,7 +159,8 @@ h2 {
   font-size: 1.2rem;
   font-weight: 700;
   margin-left: 2rem;
-  margin-top: .7rem;
+  margin-top: -8rem;
+  margin-bottom: 10rem;
   display: block;
   transition: all .3s; }
 
@@ -210,6 +212,8 @@ form select {
         background-color: $color-green;
         color: $color-white;*/
     color: #55c57a; }
+  .tag--room-name, .tag--date {
+    color: #707070; }
 
 footer {
   position: absolute;
@@ -338,30 +342,25 @@ footer {
     .section-detail article p {
       color: #707070; }
 
-.section-employee-edit {
+.section-edit {
   max-width: 85rem;
-  margin: 10rem auto 10rem auto; }
-  .section-employee-edit form {
+  margin: 5rem auto 5rem auto; }
+  .section-edit form {
     position: relative;
     width: inherit;
     background-color: #fff;
     border-radius: 2.5rem;
     box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
-    padding: 7rem 10rem 7rem 10rem; }
+    padding: 9rem 10rem 9rem 10rem; }
     @media only screen and (max-width: 37.5em) {
-      .section-employee-edit form {
+      .section-edit form {
         padding: 3rem 5rem 3rem 5rem; } }
-    .section-employee-edit form img {
-      height: 17rem;
-      width: 17rem;
-      border-radius: 2.5rem;
-      box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2); }
-    .section-employee-edit form button {
+    .section-edit form button {
       position: absolute;
       right: 10rem;
-      top: 7rem; }
+      top: 4rem; }
       @media only screen and (max-width: 37.5em) {
-        .section-employee-edit form button {
+        .section-edit form button {
           right: 5rem;
           top: 3rem; } }
 
@@ -409,35 +408,3 @@ footer {
     right: 2.5rem;
     top: 50%;
     transform: translate(0, -50%); }
-
-.section-buildings-list {
-  max-width: 85rem;
-  margin: 5rem auto 10rem auto; }
-  .section-buildings-list article {
-    position: relative;
-    background-color: #fff;
-    height: 6rem;
-    width: inherit;
-    margin: 1rem 0 1rem 0;
-    border-radius: 1.8rem;
-    box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: all .1s; }
-    .section-buildings-list article:hover {
-      transform: translateY(-0.3rem);
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
-      .section-buildings-list article:hover::after {
-        transform: scaleX(1.5) scaleY(1.6);
-        opacity: 0; }
-    .section-buildings-list article * {
-      display: inline-block; }
-    .section-buildings-list article h2 {
-      position: absolute;
-      top: 1.3rem;
-      left: 2.5rem;
-      font-size: 2rem; }
-    .section-buildings-list article div {
-      position: absolute;
-      right: 2.5rem;
-      top: 50%;
-      transform: translate(0, -50%); }

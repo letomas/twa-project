@@ -16,18 +16,16 @@ class BuildingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('city', TextType::class, ['label' => 'City: '])
-            ->add('country', TextType::class, ['label' => 'Country: '])
-            ->add('id_address', TextType::class, ['label' => 'Id address: '])
+            ->add('name', TextType::class, ['label' => 'Name: '])
             ->add('street', TextType::class, ['label' => 'Street: '])
             ->add('streetNumber', TextType::class, ['label' => 'Street number: '])
-            ->add('name', TextType::class, ['label' => 'Name: '])
+            ->add('city', TextType::class, ['label' => 'City: '])
             ->add('state', TextType::class, ['label' => 'State: '])
+            ->add('country', TextType::class, ['label' => 'Country: '])
             ->add('rooms', EntityType::class, [
                 'class' => Room::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Rooms: '
             ])
-            ->add( 'submit', SubmitType::class, ['label' => 'Save'])
         ;
     }
 

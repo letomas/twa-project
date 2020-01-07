@@ -24,6 +24,7 @@ html {
 }
 
 body {
+    position: relative;
     box-sizing: border-box;
     background-color: $color-white-dark;
     min-height: 100%;
