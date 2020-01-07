@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Request;
+use App\Form\RequestType;
 use App\Service\RequestOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,9 +67,10 @@ class RequestController extends AbstractController
      * @Route("/edit/{id}", name="request_edit", requirements={"id": "\d+"})
      *
      * @param $id
+     * @param Request $req
      * @return Response
      */
-    public function editAction($id, $request)
+    public function editAction($id, Request $req)
     {
         $request = $id ?
             $this->getDoctrine()->getRepository(Request::class)->find($id) : new request();
@@ -76,35 +78,32 @@ class RequestController extends AbstractController
         if(!$request) {
             throw $this->createNotFoundException();
         }
-        /*
-            $form = $this->createForm(RequestType::class, $request);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                if($id) {
-                    $this->requestOperation->update();
-                } else {
-                    $this->requestOperation->save($request);
-                }
+        $form = $this->createForm(RequestType::class, $request);
+        $form->handleRequest($req);
 
-                return $this->redirectToRoute('request_detail', [
-                    'id' => $request->getId(),
-                ]);
-            }
-
+        if ($form->isSubmitted() && $form->isValid()) {
             if($id) {
-                return $this->render('request/edit.html.twig', [
-                    'form' => $form->createView(),
-                    'request' => $request,
-                ]);
+                $this->requestOperation->update();
             } else {
-                return $this->render('request/create.html.twig', [
-                    'form' => $form->createView(),
-                ]);
+                $this->requestOperation->save($request);
             }
-        */
 
-        return $this->redirectToRoute('requests');
+            return $this->redirectToRoute('request_detail', [
+                'id' => $request->getId(),
+            ]);
+        }
+
+        if($id) {
+            return $this->render('request/edit.html.twig', [
+                'form' => $form->createView(),
+                'request' => $request,
+            ]);
+        } else {
+            return $this->render('request/create.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
     }
 
     /**

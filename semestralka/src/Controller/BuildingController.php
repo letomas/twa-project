@@ -68,7 +68,7 @@ class BuildingController extends AbstractController
      * @Route("/edit/{id}", name="building_edit", requirements={"id": "\d+"})
      *
      * @param $id
-     * @param $request
+     * @param Request $request
      * @return Response
      */
     public function editAction($id, Request $request)
@@ -89,7 +89,6 @@ class BuildingController extends AbstractController
             } else {
                 $this->buildingOperation->save($building);
             }
-
             return $this->redirectToRoute('building_detail', [
                 'id' => $building->getId(),
             ]);
@@ -105,8 +104,6 @@ class BuildingController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
-
-        return $this->redirectToRoute('buildings');
     }
 
     /**

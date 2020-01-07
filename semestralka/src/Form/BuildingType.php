@@ -6,6 +6,7 @@ use App\Entity\Building;
 use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,7 @@ class BuildingType extends AbstractType
                 'class' => Room::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Rooms: '
             ])
+            ->add( 'submit', SubmitType::class, ['label' => 'Save'])
         ;
     }
 
