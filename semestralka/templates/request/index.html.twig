@@ -1,28 +1,28 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}
+    Room request list
+{% endblock %}
+
 {% block section %}
     <section class="section-list">
-{#        <article>#}
-{#            <h2>#}
-{#                <span>room name</span>#}
-{#            </h2>#}
-{#            <span class="tag tag--capacity">capacity</span>#}
-{#            <span class="tag tag--room-type">#}
-{#                    room type#}
-{#                </span>#}
-{#            <a href="#" class="btn btn--view">requests</a>#}
-{#        </article>#}
-
         {% if requests is empty %}
             <h2>No request</h2>
         {% endif %}
 
         {% for request in requests %}
-            <article>
-                <span>{{ request.id }}</span>
-                <span>{{ request.room.name }}</span>
-            </article>
-            <a href="#" class="btn btn--view">details</a>#}
+        <article>
+            <h2>
+                {{ request.room.name }}
+            </h2>
+            <div class="section-list__tags">
+                <span class="tag tag--capacity">capacity</span>
+                <span class="tag tag--room-type">group</span>
+            </div>
+            <div class="section-list__buttons">
+                <a href="#" class="btn btn--edit">requests</a>
+            </div>
+        </article>
         {% endfor %}
 
     </section>

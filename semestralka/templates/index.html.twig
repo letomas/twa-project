@@ -11,11 +11,11 @@
                 <h2>
                     <span>{{ room.name }}</span>
                 </h2>
-                <div>
+                <div class="section-list__tags">
                     <span class="tag tag--capacity">{{ room.capacity }}</span>
                     <span class="tag tag--room-type">{{ room.type }}</span>
                 </div>
-                <div>
+                <div class="section-list__buttons">
                     <a href={{ path('room_detail', {id : room.id}) }}, class="btn btn--view">view</a>
                 </div>
             </article>
