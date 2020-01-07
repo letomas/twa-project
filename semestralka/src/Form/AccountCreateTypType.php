@@ -3,25 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Account;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AccountType extends AbstractType
+class AccountCreateTypType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('mail')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('roles')
-            ->add('requestsAttendees')
-            ->add('roomOccupy')
-            ->add('groupManager')
-            ->add('groups')
+            ->add('username', TextType::class, ['label' => 'Username: '])
+            ->add('password', TextType::class, ['label' => 'Password: '])
+            ->add('mail', TextType::class, ['label' => 'E-mail: '])
+            ->add('firstName', TextType::class, ['label' => 'FirstName: '])
+            ->add('lastName', TextType::class, ['label' => 'LastName: '])
         ;
     }
 
