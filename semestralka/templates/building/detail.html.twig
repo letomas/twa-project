@@ -4,22 +4,6 @@
     Room booking - Building detail
 {% endblock %}
 
-{% block headerNavigation %}
-    <nav>
-        <a href="{{ path( 'index' ) }}">rooms</a>
-        <a href="">bookings</a>
-        <a id="sub-nav-title--manage" href="#">manage</a>
-        <nav id="sub-nav--manage">
-            <a href="{{ path( 'requests' ) }}" >room requests</a>
-            <a href="">room admins</a>
-            <a href="{{ path( 'clubs' ) }}">clubs</a>
-            <a href="{{ path('rooms') }}">rooms</a>
-            <a href="{{ path( 'buildings' ) }}" id="nav-option--highlighted">buildings</a>
-        </nav>
-        <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
-    </nav>
-{% endblock %}
-
 {% block section %}
     <section class="section-room-detail">
         <article>
