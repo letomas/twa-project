@@ -60,6 +60,49 @@ class AccountController extends AbstractFOSRestController
         return $account;
     }
 
+    public function getRoomsAction($id)
+    {
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if(!$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $rooms = $account->getRoomsManager();
+        if(!$rooms) {
+            throw $this->createNotFoundException();
+        }
+
+        return $rooms;
+    }
+
+    public function getRequestsAction($id) {
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if(!$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $groups = $account->getRequestAuthor();
+        if(!$groups) {
+            throw $this->createNotFoundException();
+        }
+
+        return $groups;
+    }
+    
+    public function getGroupsAction($id) {
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        if(!$account) {
+            throw $this->createNotFoundException();
+        }
+
+        $groups = $account->getRequestAuthor();
+        if(!$groups) {
+            throw $this->createNotFoundException();
+        }
+
+        return $groups;
+    }
+
     public function deleteAction($id)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
