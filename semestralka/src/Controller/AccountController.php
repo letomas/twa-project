@@ -36,7 +36,7 @@ class AccountController extends AbstractController
         $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
 
         return $this->render('account/index.html.twig', [
-            'controller_name' => 'AccountController',
+            'accounts' => $accounts,
         ]);
     }
 

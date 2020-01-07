@@ -37,7 +37,7 @@ class BuildingController extends AbstractController
         $buildings = $this->getDoctrine()->getRepository(Building::class)->findAll();
 
         return $this->render('building/index.html.twig', [
-            'controller_name' => 'BuildingController',
+            'buildings' => $buildings,
         ]);
     }
 

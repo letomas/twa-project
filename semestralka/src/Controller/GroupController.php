@@ -37,7 +37,7 @@ class GroupController extends AbstractController
         $groups = $this->getDoctrine()->getRepository(Group::class)->findAll();
 
         return $this->render('group/index.html.twig', [
-            'controller_name' => 'GroupController',
+            'groups' => $groups,
         ]);
     }
 
