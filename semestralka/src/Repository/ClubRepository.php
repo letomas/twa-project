@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Club[]    findAll()
  * @method Club[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GroupRepository extends ServiceEntityRepository
+class ClubRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -21,9 +21,9 @@ class GroupRepository extends ServiceEntityRepository
 
     public function findAllQueryBuilder($filter = '')
     {
-        $qb = $this->createQueryBuilder('group');
+        $qb = $this->createQueryBuilder('club');
         if ($filter) {
-            $qb->andWhere('group.name LIKE :filter')
+            $qb->andWhere('club.name LIKE :filter')
                 ->setParameter('filter', '%'.$filter.'%');
         }
         return $qb;
