@@ -105,8 +105,6 @@ class BuildingController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
-
-
     }
 
     /**

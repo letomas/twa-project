@@ -6,10 +6,12 @@ use App\Entity\Account;
 use App\Entity\Group;
 use App\Entity\Request;
 use App\Entity\Room;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +21,7 @@ class AccountSuperAdminType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, ['label' => 'Username: '])
-            ->add('password', TextType::class, ['label' => 'Password: '])
+            ->add('plainPassword', PasswordType::class, ['label' => 'Password: '])
             ->add('mail', TextType::class, ['label' => 'E-mail: '])
             ->add('firstName', TextType::class, ['label' => 'FirstName: '])
             ->add('lastName', TextType::class, ['label' => 'LastName: '])
@@ -34,28 +36,26 @@ class AccountSuperAdminType extends AbstractType
                     'Group admin' => 'ROLE_GROUP_ADMIN',
                     'Super admin' => 'ROLE_SUPER_ADMIN'
                 ],
+                'required' => true,
                 'multiple' => true,
             ])
-            ->add('requestsAttendees', EntityType::class,[
-                'class' => Request::class, 'choice_label' => 'id',
-                'multiple' => true, 'required' => false, 'label' => 'Requests: '
-            ])
-            ->add('roomOccupy', EntityType::class, [
-                'class' => Room::class, 'choice_label' => 'name',
-                'multiple' => true, 'required' => false, 'label' => 'Room user: '
-            ])
-            ->add('roomsManager', EntityType::class, [
-                'class' => Room::class, 'choice_label' => 'name',
-                'multiple' => true, 'required' => false, 'label' => 'Manage rooms: '
-            ])
-            ->add('groupManager', EntityType::class, [
-                'class' => Group::class, 'choice_label' => 'name',
-                'multiple' => false, 'require' => false, 'label' => 'Manage group: '
-            ])
-            ->add('groups', EntityType::class, [
-                'class' => Group::class, 'choice_label' => 'name',
-                'multiple' => true, 'required' => false, 'label' => 'Member of groups: '
-            ])
+//            ->add('roomOccupy', EntityType::class, [
+//                'class' => Room::class, 'choice_label' => 'name',
+//                'multiple' => true, 'required' => false, 'label' => 'Room user: '
+//            ])
+//            ->add('roomsManager', EntityType::class, [
+//                'class' => Room::class, 'choice_label' => 'name',
+//                'multiple' => true, 'required' => false, 'label' => 'Manage rooms: '
+//            ])
+//            ->add('groupManager', EntityType::class, [
+//                'class' => Group::class, 'choice_label' => 'name',
+//                'multiple' => false, 'required' => false, 'label' => 'Manage group: '
+//            ])
+//            ->add('groups', EntityType::class, [
+//                'class' => Group::class, 'choice_label' => 'name',
+//                'multiple' => true, 'required' => false, 'label' => 'Member of groups: '
+//            ])
+            ->add( 'submit', SubmitType::class, ['label' => 'Save'])
         ;
     }
 

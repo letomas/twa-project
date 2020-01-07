@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Form\AccountCreateType;
 use App\Form\AccountSuperAdminType;
 use App\Service\AccountOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -80,7 +81,7 @@ class AccountController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(AccountSuperAdminType::class, $account);
+        $form = $this->createForm(AccountCreateType::class, $account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

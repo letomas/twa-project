@@ -28,5 +28,14 @@
                 </span>
             <a href="#" class="btn btn--view">book</a>
         </article>
+        {% for room in rooms %}
+            <article>
+                <span>{{ room.name }}</span>
+                <span>{{ room.capacity }}</span>
+                <span>{{ room.type }}</span>
+                <a href="#" class="btn btn--view">book</a>
+            </article>
+        {% endfor %}
+
     </section>
 {% endblock %}
