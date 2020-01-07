@@ -6,13 +6,11 @@ namespace App\Controller\Rest;
 use App\Entity\Request;
 use App\Form\RequestType;
 use App\Service\RequestOperation;
-use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Class RequestController
@@ -38,13 +36,11 @@ class RequestController extends AbstractFOSRestController
     }
 
     /**
-     * @param HttpRequest $request
-     * @return QueryBuilder
+     * @return Request[]|object[]
      */
-    public function cgetAction (HttpRequest $request)
+    public function cgetAction ()
     {
-        $filter = $request->query->get('filter');
-        $requests = $this->getDoctrine()->getRepository(Request::class)->findAllQueryBuilder($filter);
+        $requests = $this->getDoctrine()->getRepository(Request::class)->findAll();
         if(!$requests) {
             throw $this->createNotFoundException();
         }

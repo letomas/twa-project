@@ -5,11 +5,9 @@ namespace App\Controller\Rest;
 
 use App\Entity\Building;
 use App\Service\BuildingOperation;
-use Doctrine\ORM\QueryBuilder;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class BuildingController
@@ -35,13 +33,11 @@ class BuildingController extends AbstractFOSRestController
     }
 
     /**
-     * @param Request $request
-     * @return QueryBuilder
+     * @return Building|object|null
      */
-    public function cgetAction (Request $request)
+    public function cgetAction ()
     {
-        $filter = $request->query->get('filter');
-        $buildings = $this->getDoctrine()->getRepository(Building::class)->findAllQueryBuilder($filter);
+        $buildings = $this->getDoctrine()->getRepository(Building::class)->findAll();
         if(!$buildings) {
             throw $this->createNotFoundException();
         }

@@ -5,11 +5,9 @@ namespace App\Controller\Rest;
 
 use App\Entity\Room;
 use App\Service\RoomOperation;
-use Doctrine\ORM\QueryBuilder;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class RoomController
@@ -35,13 +33,11 @@ class RoomController extends AbstractFOSRestController
     }
 
     /**
-     * @param Request $request
-     * @return QueryBuilder
+     * @return Room[]|object[]
      */
-    public function cgetAction (Request $request)
+    public function cgetAction ()
     {
-        $filter = $request->query->get('filter');
-        $rooms = $this->getDoctrine()->getRepository(Room::class)->findAllQueryBuilder($filter);
+        $rooms = $this->getDoctrine()->getRepository(Room::class)->findAll();
         if(!$rooms) {
             throw $this->createNotFoundException();
         }

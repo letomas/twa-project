@@ -5,11 +5,9 @@ namespace App\Controller\Rest;
 
 use App\Entity\Account;
 use App\Service\AccountOperation;
-use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -36,13 +34,11 @@ class AccountController extends AbstractFOSRestController
     }
 
     /**
-     * @param Request $request
-     * @return QueryBuilder
+     * @return Account[]|object[]
      */
-    public function cgetAction (Request $request)
+    public function cgetAction ()
     {
-        $filter = $request->query->get('filter');
-        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAllQueryBuilder($filter);
+        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
         if(!$accounts) {
             throw $this->createNotFoundException();
         }

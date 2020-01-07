@@ -7,11 +7,9 @@ use App\Entity\Account;
 use App\Entity\Group;
 use App\Entity\Room;
 use App\Service\GroupOperation;
-use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GroupController
@@ -37,13 +35,11 @@ class GroupController extends AbstractFOSRestController
     }
 
     /**
-     * @param Request $request
-     * @return QueryBuilder
+     * @return Group[]|object[]
      */
-    public function cgetAction (Request $request)
+    public function cgetAction ()
     {
-        $filter = $request->query->get('filter');
-        $groups = $this->getDoctrine()->getRepository(Group::class)->findAllQueryBuilder($filter);
+        $groups = $this->getDoctrine()->getRepository(Group::class)->findAll();
         if(!$groups) {
             throw $this->createNotFoundException();
         }

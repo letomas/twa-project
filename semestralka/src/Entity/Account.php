@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
- * @ExclusionPolicy("none")
+ * @ExclusionPolicy("all")
  */
 class Account implements UserInterface
 {
@@ -18,45 +18,47 @@ class Account implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Expose
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Exclude
      */
     private $username;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Exclude
      */
     private $password;
 
     /**
      * @var
-     * @Exclude
      */
     private $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Expose
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="array", length=255)
+     * @Expose
      */
     private $roles = [];
 
