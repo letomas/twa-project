@@ -7,8 +7,10 @@ use App\Entity\Account;
 use App\Entity\Group;
 use App\Entity\Room;
 use App\Service\GroupOperation;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,6 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class GroupController extends AbstractFOSRestController
 {
+    /**
+     * @var GroupOperation
+     */
     protected $groupOperation;
 
     /**
@@ -31,6 +36,10 @@ class GroupController extends AbstractFOSRestController
         $this->groupOperation = $groupOperation;
     }
 
+    /**
+     * @param Request $request
+     * @return QueryBuilder
+     */
     public function cgetAction (Request $request)
     {
         $filter = $request->query->get('filter');
@@ -57,6 +66,10 @@ class GroupController extends AbstractFOSRestController
         return $group;
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function deleteAction($id)
     {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
@@ -68,6 +81,47 @@ class GroupController extends AbstractFOSRestController
         return $this->redirectView($this->generateUrl('api_get_groups'));
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getAccountsAction($id) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
+
+        $members = $group->getMembers();
+        if(!$members) {
+            throw $this->createNotFoundException();
+        }
+
+        return $members;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getRoomsAction($id) {
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
+
+        $rooms = $group->getRooms();
+        if(!$rooms) {
+            throw $this->createNotFoundException();
+        }
+
+        return $rooms;
+    }
+
+    /**
+     * @param $id
+     * @param $slug
+     * @return View
+     */
     public function putAccountAction($id, $slug) {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
@@ -76,9 +130,14 @@ class GroupController extends AbstractFOSRestController
         }
 
         $this->groupOperation->addAccount($group, $account);
-        return $this->redirectView($this->generateUrl('api_get_groups'));
+        return $this->redirectView($this->generateUrl('api_get_group', [ 'id' => $group->getId() ]));
     }
 
+    /**
+     * @param $id
+     * @param $slug
+     * @return View
+     */
     public function deleteAccountAction($id, $slug) {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
@@ -90,6 +149,11 @@ class GroupController extends AbstractFOSRestController
         return $this->redirectView($this->generateUrl('api_get_groups'));
     }
 
+    /**
+     * @param $id
+     * @param $slug
+     * @return View
+     */
     public function putRoomAction($id, $slug) {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
@@ -98,9 +162,14 @@ class GroupController extends AbstractFOSRestController
         }
 
         $this->groupOperation->addRoom($group, $room);
-        return $this->redirectView($this->generateUrl('api_get_groups'));
+        return $this->redirectView($this->generateUrl('api_get_group', [ 'id' => $group->getId() ]));
     }
 
+    /**
+     * @param $id
+     * @param $slug
+     * @return View
+     */
     public function deleteRoomAction($id, $slug) {
         $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
         $room = $this->getDoctrine()->getRepository(Room::class)->find($id);

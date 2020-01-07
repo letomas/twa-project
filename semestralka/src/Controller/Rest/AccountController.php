@@ -5,11 +5,10 @@ namespace App\Controller\Rest;
 
 use App\Entity\Account;
 use App\Service\AccountOperation;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use Doctrine\ORM\QueryBuilder;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -36,6 +35,10 @@ class AccountController extends AbstractFOSRestController
         $this->accountOperation = $accountOperation;
     }
 
+    /**
+     * @param Request $request
+     * @return QueryBuilder
+     */
     public function cgetAction (Request $request)
     {
         $filter = $request->query->get('filter');
@@ -62,6 +65,10 @@ class AccountController extends AbstractFOSRestController
         return $account;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getRoomsAction($id)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
@@ -77,6 +84,10 @@ class AccountController extends AbstractFOSRestController
         return $rooms;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getRequestsAction($id) {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
         if(!$account) {
@@ -90,7 +101,11 @@ class AccountController extends AbstractFOSRestController
 
         return $groups;
     }
-    
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getGroupsAction($id) {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
         if(!$account) {
@@ -105,6 +120,10 @@ class AccountController extends AbstractFOSRestController
         return $groups;
     }
 
+    /**
+     * @param $id
+     * @return View
+     */
     public function deleteAction($id)
     {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
