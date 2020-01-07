@@ -9,6 +9,8 @@ use Doctrine\DBAL\Types\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,22 +19,19 @@ class RequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start', DateTimeType::class, [
-                'label' => 'Validate until:',
-                'format' => DateTimeType::HTML5_FORMAT,
-                'data' => new \DateTime(),
-                'html5' => true,
-                'widget' => 'single_text'
+            ->add('start', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'from: ',
             ])
-            ->add('end', DateTimeType::class, [
-                'label' => 'Validate until:',
-                'format' => DateTimeType::HTML5_FORMAT,
+            ->add('end', DateType::class, [
+                'label' => 'to: ',
+                'format' => DateType::HTML5_FORMAT,
                 'data' => new \DateTime(),
                 'html5' => true,
                 'widget' => 'single_text'
             ])
             ->add('attendees', EntityType::class, [
-                'class' => Account::class, 'choice_label' => 'name',
+                'class' => Account::class, 'choice_label' => 'username',
                 'multiple' => true, 'required' => true, 'label' => 'Attendees: '
             ])
             ->add('room', EntityType::class, [

@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% set title = 'Edit request' %}
+{% set active = '' %}
+{% block content %}
+    <h1>Edit request</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

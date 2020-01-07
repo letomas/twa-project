@@ -26,11 +26,24 @@
                 <a href="{{ path('rooms') }}">rooms</a>
                 <a href="{{ path( 'buildings' ) }}">buildings</a>
             </nav>
-            <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+            {% if app.user %}
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {% else %}
+                <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+            {% endif %}
         </nav>
     {% endblock %}
 </div>
 {% block section %}
 {% endblock %}
 </body>
+
+<footer>
+    <div class="copyright">
+        Vytvorili <a href="mailto:nguyed14@fit.cvut.cz">Nguyen Duc Thang</a>,
+        <a href="mailto:nguyed14@fit.cvut.cz">Le Tomas</a>,
+        <a href="mailto:nguyed14@fit.cvut.cz">Le Dinh Tuan</a> v roce 2019/20
+        v ramci predmetu <a href="https://courses.fit.cvut.cz/BI-TWA/">BI-TWA.1</a>
+    </div>
+</footer>
 </html>

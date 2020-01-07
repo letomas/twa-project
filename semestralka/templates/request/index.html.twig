@@ -18,15 +18,28 @@
 
 {% block section %}
     <section class="section-list">
-        <article>
-            <h2>
-                <span>room name</span>
-            </h2>
-            <span class="tag tag--capacity">capacity</span>
-            <span class="tag tag--room-type">
-                    room type
-                </span>
-            <a href="#" class="btn btn--view">requests</a>
-        </article>
+{#        <article>#}
+{#            <h2>#}
+{#                <span>room name</span>#}
+{#            </h2>#}
+{#            <span class="tag tag--capacity">capacity</span>#}
+{#            <span class="tag tag--room-type">#}
+{#                    room type#}
+{#                </span>#}
+{#            <a href="#" class="btn btn--view">requests</a>#}
+{#        </article>#}
+
+        {% if requests is empty %}
+            <h2>No request</h2>
+        {% endif %}
+
+        {% for request in requests %}
+            <article>
+                <span>{{ request.id }}</span>
+                <span>{{ request.room.name }}</span>
+            </article>
+            <a href="#" class="btn btn--view">details</a>#}
+        {% endfor %}
+
     </section>
 {% endblock %}

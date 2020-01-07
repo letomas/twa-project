@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% set title = 'Creating new request' %}
+{% set active = '' %}
+{% block section %}
+    <h1>Creating new request</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block headerNavigation %}
+    <nav>
+        <a href="{{ path( 'index' ) }}">rooms</a>
+        <a href="">bookings</a>
+        <a id="sub-nav-title--manage" href="#">manage</a>
+        <nav id="sub-nav--manage">
+            <a href="{{ path( 'requests' ) }}">room requests</a>
+            <a href="">room admins</a>
+            <a href="{{ path( 'groups' ) }}">groups</a>
+            <a href="{{ path('rooms') }}">rooms</a>
+            <a href="{{ path( 'buildings' ) }}" id="nav-option--highlighted">buildings</a>
+        </nav>
+        <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+    </nav>
+{% endblock %}
+
+{% block section %}
+    {#    pridej sem prosim nejaky nazev pro stranku#}
+    <section class="section-list">
+        {% for account in accounts %}
+            {#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
+            <article>
+                <span>{{ account.username }}</span>
+                <span>{{ account.firstName }}</span>
+                <span>{{ account.lastName }}</span>
+                <span>{{ account.mail }}</span>
+{#                oni se nad sebou lezi#}
+                <a href="#" class="btn btn--view">view</a>
+                <a href="#" class="btn btn-edit">edit</a>
+                <a href="#" class="btn btn--delete">delete</a>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
