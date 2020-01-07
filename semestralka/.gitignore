@@ -178,4 +178,4 @@ fabric.properties
 
 
 # End of https://www.gitignore.io/api/symfony,phpstorm,composer,visualstudiocode
-
+/node_modules
