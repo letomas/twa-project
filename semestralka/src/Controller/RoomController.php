@@ -37,7 +37,7 @@ class RoomController extends AbstractController
         $rooms = $this->getDoctrine()->getRepository(Room::class)->findAll();
 
         return $this->render('room/index.html.twig', [
-            'controller_name' => 'RoomController',
+            'rooms' => $rooms,
         ]);
     }
 

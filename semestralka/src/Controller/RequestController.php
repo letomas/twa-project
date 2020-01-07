@@ -37,7 +37,7 @@ class RequestController extends AbstractController
         $requests = $this->getDoctrine()->getRepository(Request::class)->findAll();
 
         return $this->render('request/index.html.twig', [
-            'controller_name' => 'RequestController',
+            'requests' => $requests,
         ]);
     }
 
