@@ -65,6 +65,27 @@ class AccountController extends AbstractController
     }
 
     /**
+     * @Route("/roomAdmins", name="room_admins")
+     */
+    public function roomAdmin()
+    {
+        $admins = [];
+
+        $accounts = $this->getDoctrine()->getRepository(Account::class)->findAll();
+
+        foreach ($accounts as $account)
+        {
+            if ($account->getRoomsManager() != null){
+                $admins = $account;
+            }
+        }
+
+        return $this->render('account/roomAdmins.html.twig', [
+           'admins' => $admins
+        ]);
+    }
+
+    /**
      * @Route("/create", name="account_create", defaults={"id": null})
      * @Route("/edit/{id}", name="account_edit", requirements={"id": "\d+"})
      *

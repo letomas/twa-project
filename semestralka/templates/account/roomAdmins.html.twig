@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block section %}
+    {#    pridej sem prosim nejaky nazev pro stranku#}
+    <section class="section-list">
+        {% if admins is empty %}
+            <h2>No room's admin in database</h2>
+        {% endif %}
+
+        {% for admin in admins %}
+            {#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
+            <article>
+                <span>{{ admin.username }}</span>
+                <span>{{ admin.firstName }}</span>
+                <span>{{ admin.lastName }}</span>
+                <span>{{ admin.mail }}</span>
+                {#                oni se nad sebou lezi#}
+                <a href="#" class="btn btn--view">view</a>
+                <a href="#" class="btn btn-edit">edit</a>
+                <a href="#" class="btn btn--delete">delete</a>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
