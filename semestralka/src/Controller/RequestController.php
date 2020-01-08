@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Request;
 use App\Form\RequestType;
 use App\Service\RequestOperation;
+use Exception;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +46,7 @@ class RequestController extends AbstractController
     }
 
     /**
-     * @Route("/detail/{id}", name="employee_detail", requirements={"id": "\d+"})
+     * @Route("/detail/{id}", name="request_detail", requirements={"id": "\d+"})
      *
      * @param $id
      * @return Response
@@ -70,6 +72,7 @@ class RequestController extends AbstractController
      * @param $id
      * @param HttpRequest $req
      * @return Response
+     * @throws Exception
      */
     public function editAction($id, HttpRequest $req)
     {
@@ -87,6 +90,8 @@ class RequestController extends AbstractController
             if($id) {
                 $this->requestOperation->update();
             } else {
+                $request->setCreateBy($this->getUser());
+                $request->setCreateTime(new DateTime());
                 $this->requestOperation->save($request);
             }
 

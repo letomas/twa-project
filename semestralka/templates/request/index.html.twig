@@ -13,7 +13,7 @@
             <h3>Request</h3>
             <div class="section-list__hud-panel__tags">
                 <span class="tag">capacity</span>
-                <span class="tag">group</span>
+                <span class="tag">user</span>
             </div>
         </section>
         {% for request in requests %}
@@ -22,11 +22,12 @@
                 {{ request.room.name }}
             </h2>
             <div class="section-list__tags">
-                <span class="tag">capacity</span>
-                <span class="tag">group</span>
+                <span class="tag">{{ request.room.capacity }}</span>
+                <span class="tag">{{ request.user.username }}</span>
             </div>
             <div class="section-list__buttons">
-                <a href="#" class="btn btn--edit">requests</a>
+                <a href="" class="btn btn--delete">deny</a>
+                <a href="" class="btn btn--view">view</a>
             </div>
         </article>
         {% endfor %}
