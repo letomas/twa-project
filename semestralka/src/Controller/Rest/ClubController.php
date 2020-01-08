@@ -120,7 +120,7 @@ class ClubController extends AbstractFOSRestController
      */
     public function putAccountAction($id, $slug) {
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($slug);
         if (!$club || !$account) {
             throw $this->createNotFoundException();
         }
@@ -136,7 +136,7 @@ class ClubController extends AbstractFOSRestController
      */
     public function deleteAccountAction($id, $slug) {
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
+        $account = $this->getDoctrine()->getRepository(Account::class)->find($slug);
         if (!$club || !$account) {
             throw $this->createNotFoundException();
         }
@@ -152,7 +152,7 @@ class ClubController extends AbstractFOSRestController
      */
     public function putRoomAction($id, $slug) {
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
+        $room = $this->getDoctrine()->getRepository(Room::class)->find($slug);
         if (!$club || !$room) {
             throw $this->createNotFoundException();
         }
@@ -168,7 +168,7 @@ class ClubController extends AbstractFOSRestController
      */
     public function deleteRoomAction($id, $slug) {
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        $room = $this->getDoctrine()->getRepository(Room::class)->find($id);
+        $room = $this->getDoctrine()->getRepository(Room::class)->find($slug);
         if (!$club || !$room) {
             throw $this->createNotFoundException();
         }
