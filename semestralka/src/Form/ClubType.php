@@ -49,6 +49,7 @@ class ClubType extends AbstractType
                 'class' => Account::class, 'choice_label' => 'username',
                 'multiple' => true, 'required' => false, 'label' => 'Members: '
             ])
+            ->add( 'submit', SubmitType::class, ['label' => 'Save'])
         ;
     }
 
