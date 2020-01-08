@@ -31,13 +31,15 @@
                 {{ request.room.name }}
             </h2>
             <h3>Request by</h3>
-            <span>{{ request.user.username }}</span>
+            <span>{{ request.createBy.username }}</span>
             <h3>Room Type</h3>
             <span>{{ request.room.club }}</span>
             <h3>Capacity</h3>
             <span>{{ request.room.capacity }}</span>
             <h3>Admin</h3>
-            <span>{{ request.room.user.username }}</span>
+            {% for admin in request.room.manageBy %}
+                <span>{{ admin.username }}</span>
+            {% endfor %}
             <h3>Description</h3>
             <p>
                 {{ request.room.description }}
