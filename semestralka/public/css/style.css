@@ -273,13 +273,15 @@ footer {
     width: calc(100% - 25rem); }
     @media only screen and (max-width: 56.25em) {
       .header-navigation nav {
-        top: 42%; } }
+        top: 38%; } }
     @media only screen and (max-width: 37.5em) {
       .header-navigation nav {
         right: 12rem; } }
     @media only screen and (max-width: 28.75em) {
       .header-navigation nav {
-        top: 70%; } }
+        top: 70%;
+        left: 3rem;
+        width: calc(100% - 3rem); } }
     .header-navigation nav a {
       margin: 0 .5rem 0 .5rem;
       font-family: "Nunito", sans-serif;
@@ -361,11 +363,14 @@ footer {
     padding: 6rem 5rem 5rem 5rem; }
     @media only screen and (max-width: 37.5em) {
       .section-detail article {
-        padding: 3rem 5rem 3rem 5rem; } }
+        padding: 5rem 5rem 3rem 5rem; } }
     .section-detail article div {
       position: absolute;
       right: 5rem;
       top: 3rem; }
+      @media only screen and (max-width: 37.5em) {
+        .section-detail article div {
+          top: 1.5rem; } }
     .section-detail article h3 {
       font-size: 1.2rem;
       margin-top: 1rem; }
@@ -436,6 +441,12 @@ footer {
     right: 30rem;
     top: 50%;
     transform: translate(0, -50%); }
+    @media only screen and (max-width: 37.5em) {
+      .section-list__tags {
+        right: 15rem; } }
+    @media only screen and (max-width: 28.75em) {
+      .section-list__tags {
+        display: none !important; } }
   .section-list__buttons {
     position: absolute;
     right: 2.5rem;
@@ -457,6 +468,12 @@ footer {
     .section-list__hud-panel__tags {
       position: absolute;
       right: 30rem; }
+      @media only screen and (max-width: 37.5em) {
+        .section-list__hud-panel__tags {
+          right: 15rem; } }
+      @media only screen and (max-width: 28.75em) {
+        .section-list__hud-panel__tags {
+          display: none !important; } }
     .section-list__hud-panel__buttons {
       position: absolute;
       right: 0; }

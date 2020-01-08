@@ -9,10 +9,10 @@
         <article>
             <div>
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="#" class="btn btn--delete">delete</a>
+                    <a href="{{ path('room_remove', { id: room.id }) }}" class="btn btn--delete">delete</a>
                 {% endif %}
                 {% if is_granted('edit', room) or is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="#" class="btn btn--edit">edit</a>
+                    <a href="{{ path('room_edit', { id: room.id }) }}" class="btn btn--edit">edit</a>
                 {% endif %}
             </div>
             <h2>

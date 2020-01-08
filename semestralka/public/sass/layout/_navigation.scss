@@ -36,7 +36,7 @@
         width: calc(100% - 25rem);
 
         @include respond(tab-port) {
-            top: 42%;
+            top: 38%;
         }
 
         @include respond(phone) {
@@ -45,6 +45,8 @@
 
         @include respond(extra-small) {
             top: 70%;
+            left: 3rem;
+            width: calc(100% - 3rem);
         }
 
         & a {
