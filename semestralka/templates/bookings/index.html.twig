@@ -24,9 +24,6 @@
                     <h2>
                         {{ request.room.name }}
                     </h2>
-                    <div class="section-list__tags">
-                        <span class="tag">{{ request.create_time }}</span>
-                    </div>
                     <div class="section-list__buttons">
                         <a href="{{ path( 'request_detail', {id: request.id} ) }}" class="btn btn--view">view</a>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
