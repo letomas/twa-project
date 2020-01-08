@@ -56,11 +56,11 @@ class ClubOperation
             return;
         }
         $members[] = $account;
-        $clubs = $account->getGroups();
+        $clubs = $account->getClubs();
         $clubs[] = $club;
 
         $club->setMembers($members);
-        $account->setGroups($clubs);
+        $account->setClubs($clubs);
 
         $this->em->flush();
     }
@@ -71,13 +71,13 @@ class ClubOperation
         if(!in_array($account, $members, true)) {
             return;
         }
-        $clubs = $account->getGroups();
+        $clubs = $account->getClubs();
 
         $members = $this->removeObjectFromArray($members, $account);
         $clubs = $this->removeObjectFromArray($clubs, $club);
 
         $club->setMembers($members);
-        $account->setGroups($clubs);
+        $account->setClubs($clubs);
 
         $this->em->flush();
     }
@@ -91,7 +91,7 @@ class ClubOperation
         $rooms[] = $room;
 
         $club->setRooms($rooms);
-        $room->setGroup($club);
+        $room->setClub($club);
 
         $this->em->flush();
     }
@@ -106,7 +106,7 @@ class ClubOperation
         $this->removeObjectFromArray($rooms, $room);
 
         $club->setRooms($rooms);
-        $room->setGroup(null);
+        $room->setClub(null);
 
         $this->em->flush();
     }
