@@ -130,7 +130,7 @@ class RequestVoter extends Voter
 
     private function isGroupMember(Account $account, Club $club)
     {
-        foreach ($account->getGroups() as $userGroup){
+        foreach ($account->getClubs() as $userGroup){
             if($club === $userGroup) {
                 return true;
             }

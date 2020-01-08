@@ -90,25 +90,25 @@ class AccountController extends AbstractFOSRestController
             throw $this->createNotFoundException();
         }
 
-        $clubs = $account->getRequestAuthor();
-        if(!$clubs) {
+        $requests = $account->getRequestAuthor();
+        if(!$requests) {
             throw $this->createNotFoundException();
         }
 
-        return $clubs;
+        return $requests;
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function getGroupsAction($id) {
+    public function getClubsAction($id) {
         $account = $this->getDoctrine()->getRepository(Account::class)->find($id);
         if(!$account) {
             throw $this->createNotFoundException();
         }
 
-        $clubs = $account->getRequestAuthor();
+        $clubs = $account->getClubs();
         if(!$clubs) {
             throw $this->createNotFoundException();
         }
