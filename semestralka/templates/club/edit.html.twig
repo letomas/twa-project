@@ -4,11 +4,14 @@
     Room Booking - Manage Clubs - Edit
 {% endblock %}
 
-{% set title = 'Edit request' %}
-{% set active = '' %}
 {% block section %}
-    <h1>Edit request</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <section class="section-edit">
+        {{ form_start(form) }}
+        <div class="form__group">
+            {{ form_widget(form.name, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <button type="submit" class="btn btn--save">save</button>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}

@@ -12,3 +12,15 @@
     {{ form_widget(form) }}
     {{ form_end(form) }}
 {% endblock %}
+
+{% block section %}
+    <section class="section-edit">
+        {{ form_start(form) }}
+        <div class="form__group">
+            {{ form_widget(form.name, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <button type="submit" class="btn btn--save">save</button>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
