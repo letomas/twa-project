@@ -21,6 +21,20 @@
         line-height: 3.5rem !important;
     }
 
+    &--mid {
+        font-size: 2rem !important;
+        line-height: 2.5rem !important;
+    }
+
+    &--rect {
+        border-radius: 5px;
+    }
+
+    &--center {
+        display: block;
+        margin: auto;
+    }
+
     &--view {
         background-color: $color-white;
         border: 1px solid $color-pink;

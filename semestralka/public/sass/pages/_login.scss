@@ -1,0 +1,18 @@
+.section-login {
+  max-width: 40rem;
+  margin: 5rem auto 5rem auto;
+
+  h2 {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+
+  form {
+    position: relative;
+    width: inherit;
+    background-color: $color-white;
+    border-radius: 2.5rem;
+    box-shadow: 0 .1rem .6rem rgba($color-black, .2);
+    padding: 5rem 7rem 5rem 7rem;
+  }
+}

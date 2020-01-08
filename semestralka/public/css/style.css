@@ -75,6 +75,17 @@ h2 {
   font-size: 3rem !important;
   line-height: 3.5rem !important; }
 
+.btn--mid {
+  font-size: 2rem !important;
+  line-height: 2.5rem !important; }
+
+.btn--rect {
+  border-radius: 5px; }
+
+.btn--center {
+  display: block;
+  margin: auto; }
+
 .btn--view {
   background-color: #fff;
   border: 1px solid #FC9696;
@@ -449,3 +460,17 @@ footer {
     .section-list__hud-panel__buttons {
       position: absolute;
       right: 0; }
+
+.section-login {
+  max-width: 40rem;
+  margin: 5rem auto 5rem auto; }
+  .section-login h2 {
+    margin-bottom: 4rem;
+    text-align: center; }
+  .section-login form {
+    position: relative;
+    width: inherit;
+    background-color: #fff;
+    border-radius: 2.5rem;
+    box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.2);
+    padding: 5rem 7rem 5rem 7rem; }
