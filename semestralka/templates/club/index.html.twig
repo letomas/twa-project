@@ -16,7 +16,7 @@
                     <span class="tag">managed by</span>
                 </div>
                 <div class="section-list__hud-panel__buttons">
-                    <a href="{{ path( 'building_create')}}" class="btn btn--add">add</a>
+                    <a href="{{ path( 'club_create')}}" class="btn btn--add">add</a>
                 </div>
             </section>
             {% for club in clubs %}
@@ -24,14 +24,14 @@
                     <h2>
                         {{ club.name }}
                     </h2>
-                    <div class="section-list__tags">
-                        <span class="tag">{{ club.manageBy }}</span>
-                    </div>
+{#                    <div class="section-list__tags">#}
+{#                        <span class="tag">{{ club.manageBy.username }}</span>#}
+{#                    </div>#}
                     <div class="section-list__buttons">
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <a href="{{ path( 'building_edit', {id: building.id} ) }}" class="btn btn--edit">edit</a>
+                            <a href="{{ path( 'club_edit', {id: club.id} ) }}" class="btn btn--edit">edit</a>
                         {% endif %}
-                        <a href="{{ path( 'building_detail', {id: building.id} ) }}" class="btn btn--view">view</a>
+                        <a href="{{ path( 'club_detail', {id: club.id} ) }}" class="btn btn--view">view</a>
                     </div>
                 </article>
             {% endfor %}

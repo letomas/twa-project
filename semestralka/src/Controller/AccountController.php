@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\AccountCreateType;
+use App\Form\AccountSuperAdminType;
 use App\Service\AccountOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -114,8 +115,11 @@ class AccountController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(AccountCreateType::class, $account);
-
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $form = $this->createForm(AccountSuperAdminType::class, $account);
+        }else {
+            $form = $this->createForm(AccountCreateType::class, $account);
+        }
 
         $form->handleRequest($request);
 

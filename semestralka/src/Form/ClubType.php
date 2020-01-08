@@ -7,6 +7,7 @@ use App\Entity\Club;
 use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,9 +31,9 @@ class ClubType extends AbstractType
             ->add('name', TextType::class, ['label' => 'Name: '])
             ->add('manageBy', EntityType::class, [
                 'class' => Account::class, 'choice_label' => 'username',
-                'multiple' => false, 'required' => false, 'label' => 'Manage by: '
+                'multiple' => true, 'required' => false, 'label' => 'Manage by: '
             ])
-            ->add('subClub', EntityType::class, [
+            ->add('subClubs', EntityType::class, [
                 'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Subgroups: '
             ])
@@ -48,6 +49,7 @@ class ClubType extends AbstractType
                 'class' => Account::class, 'choice_label' => 'username',
                 'multiple' => true, 'required' => false, 'label' => 'Members: '
             ])
+            ->add( 'submit', SubmitType::class, ['label' => 'Create'])
         ;
     }
 
