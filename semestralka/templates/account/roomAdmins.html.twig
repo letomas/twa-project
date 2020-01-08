@@ -10,7 +10,15 @@
             <h2 class="section-list__notice">no room's admin in database</h2>
             <a href="{{ path( 'accounts')}}" class="section-list__notice__btn btn btn--add btn--big">add admin</a>
         {% endif %}
-
+        <section class="section-list__hud-panel">
+            <h3>Username</h3>
+            <div class="section-list__hud-panel__tags">
+                <span class="tag">Email</span>
+            </div>
+            <div class="section-list__hud-panel__buttons">
+                <a href="{{ path( 'accounts')}}" class="btn btn--add">add</a>
+            </div>
+        </section>
         {% for admin in admins %}
             <article>
                 <h2>{{ admin.username }}</h2>
