@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\MaxDepth;
@@ -41,7 +42,7 @@ class Club
     private $subClubs = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Club", mappedBy="subClub")
+     * @ORM\ManyToMany(targetEntity="Club", mappedBy="subClubs")
      * @MaxDepth(1)
      */
     private $superClub;
@@ -61,6 +62,14 @@ class Club
      * @MaxDepth(1)
      */
     private $rooms = [];
+
+    public function __construct()
+    {
+        $this->subClubs = new ArrayCollection();
+        $this->manageBy = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
+        $this->members = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -97,7 +106,7 @@ class Club
     /**
      * @return array
      */
-    public function getManageBy(): array
+    public function getManageBy()
     {
         return $this->manageBy;
     }
@@ -113,7 +122,7 @@ class Club
     /**
      * @return array
      */
-    public function getSubClubs(): array
+    public function getSubClubs()
     {
         return $this->subClubs;
     }
@@ -145,7 +154,7 @@ class Club
     /**
      * @return array
      */
-    public function getMembers(): array
+    public function getMembers()
     {
         return $this->members;
     }
@@ -161,7 +170,7 @@ class Club
     /**
      * @return array
      */
-    public function getRooms(): array
+    public function getRooms()
     {
         return $this->rooms;
     }

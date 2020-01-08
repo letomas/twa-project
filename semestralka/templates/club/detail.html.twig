@@ -18,7 +18,7 @@
                 <span>Don't have any group admin.</span>
             {% else %}
                 {% for manager in club.manageBy %}
-                    <span> {{ club.manageBy.username }}</span>
+                    <span> {{ manager.username }}</span>
                 {% endfor %}
             {% endif %}
             <h3>Number of members</h3>
@@ -31,10 +31,10 @@
                 <span>{{ subClub.name }}</span>
             {% endfor %}
             <h3>Supergroup</h3>
-            {% if club.superClub is not defined %}
-                <span>{{ club.superClub.name }}</span>
-            {% else %}
+            {% if club.superClub is null %}
                 <span>Don't have superClub.</span>
+            {% else %}
+                <span>{{ club.superClub.name }}</span>
             {% endif %}
         </article>
     </section>
