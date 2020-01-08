@@ -8,7 +8,7 @@
     <section class="section-list">
         {% if requests is empty %}
             <h2 class="section-list__notice">no requests in database</h2>
-            <a href="{{ path( 'building_create')}}" class="section-list__notice__btn btn btn--add btn--big">book a room</a>
+            <a href="{{ path( 'request_create')}}" class="section-list__notice__btn btn btn--add btn--big">book a room</a>
         {% else %}
             <section class="section-list__hud-panel">
                 <h3>Request</h3>
@@ -16,7 +16,7 @@
                     <span class="tag">date</span>
                 </div>
                 <div class="section-list__hud-panel__buttons">
-                    <a href="{{ path( 'building_create')}}" class="btn btn--add">book</a>
+                    <a href="{{ path( 'request_create')}}" class="btn btn--add">book</a>
                 </div>
             </section>
             {% for request in requests %}
