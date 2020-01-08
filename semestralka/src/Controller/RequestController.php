@@ -87,6 +87,8 @@ class RequestController extends AbstractController
             if($id) {
                 $this->requestOperation->update();
             } else {
+                $request->setCreateBy($this->getUser());
+                $request->setCreateTime(new \DateTime());
                 $this->requestOperation->save($request);
             }
 
