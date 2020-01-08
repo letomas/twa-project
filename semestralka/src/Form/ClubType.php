@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Account;
 use App\Entity\Club;
-use Doctrine\DBAL\Types\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,14 +28,14 @@ class ClubType extends AbstractType
         $builder
             ->add('name', TextType::class, ['label' => 'Username: '])
             ->add('manageBy', EntityType::class, [
-                'class' => Account::class, 'choice_label' => 'name',
+                'class' => Account::class, 'choice_label' => 'username',
                 'multiple' => false, 'required' => false, 'label' => 'Manage by: '
             ])
-            ->add('subGroup', EntityType::class, [
+            ->add('subClub', EntityType::class, [
                 'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Subgroups: '
             ])
-            ->add('superGroup', EntityType::class, [
+            ->add('superClub', EntityType::class, [
                 'class' => Club::class, 'choice_label' => 'name',
                 'multiple' => false, 'required' => false, 'label' => 'Subgroups: '
             ])
