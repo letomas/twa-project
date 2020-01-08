@@ -32,17 +32,14 @@ class Club
     private $manageBy = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Club", inversedBy="superClub")
-     * @ORM\JoinTable(name = "club_subclub",
-     *     joinColumns={@ORM\JoinColumn(name="club_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="sub_club_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="Club", mappedBy="superClub")
      * @MaxDepth(1)
      */
     private $subClubs = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity="Club", mappedBy="subClubs")
+     * @ORM\ManyToOne(targetEntity="Club", inversedBy="subClubs")
+     * @ORM\JoinColumn(name="sub_club_id", referencedColumnName="id")
      * @MaxDepth(1)
      */
     private $superClub;
@@ -69,6 +66,30 @@ class Club
         $this->manageBy = new ArrayCollection();
         $this->rooms = new ArrayCollection();
         $this->members = new ArrayCollection();
+    }
+
+    public function addSubClubs ( Club $club ): self
+    {
+        $this->subClubs->add($club);
+        return $this;
+    }
+
+    public function removePosition ( Club $club ): self
+    {
+        $this->subClubs->removeElement($club);
+        return $this;
+    }
+
+    public function addManageBy ( Account $manager ): self
+    {
+        $this->manageBy->add($manager);
+        return $this;
+    }
+
+    public function removeManageBy ( Account $manager ): self
+    {
+        $this->manageBy->removeElement($manager);
+        return $this;
     }
 
     /**
@@ -120,7 +141,7 @@ class Club
     }
 
     /**
-     * @return array
+     * @return array|ArrayCollection
      */
     public function getSubClubs()
     {
@@ -128,9 +149,9 @@ class Club
     }
 
     /**
-     * @param array $subClubs
+     * @param array|ArrayCollection $subClubs
      */
-    public function setSubClubs(array $subClubs): void
+    public function setSubClubs($subClubs): void
     {
         $this->subClubs = $subClubs;
     }
