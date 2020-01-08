@@ -76,7 +76,7 @@ class AccountController extends AbstractController
         foreach ($accounts as $account)
         {
             if ($account->getRoomsManager() != null){
-                $admins = $account;
+                $admins[] = $account;
             }
         }
 
