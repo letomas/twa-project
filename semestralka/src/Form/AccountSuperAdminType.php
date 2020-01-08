@@ -3,10 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Account;
-use App\Entity\Club;
-use App\Entity\Request;
-use App\Entity\Room;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

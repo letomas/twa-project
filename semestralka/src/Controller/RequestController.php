@@ -6,9 +6,9 @@ use App\Entity\Request;
 use App\Form\RequestType;
 use App\Service\RequestOperation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 
 /**
  * Class RequestController

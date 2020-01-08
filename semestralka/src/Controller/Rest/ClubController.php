@@ -7,8 +7,8 @@ use App\Entity\Account;
 use App\Entity\Club;
 use App\Entity\Room;
 use App\Service\ClubOperation;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 
 /**
