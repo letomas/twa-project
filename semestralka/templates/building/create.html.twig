@@ -1,10 +1,40 @@
-{% extends 'layout.html.twig' %}
+{% extends '/building/component/navbar.html.twig' %}
 
-{% set title = 'Creating new building' %}
-{% set active = '' %}
+{% block title %}
+    Room Booking - Manage Buildings - Add
+{% endblock %}
 {% block section %}
-    <h1>Creating new building</h1>
+<section class="section-edit">
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    <div class="form__group">
+        {{ form_widget(form.name, {'attr': {'class': 'form__input'}}) }}
+        {{ form_label(form.name, 'Building Name', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.street, {'attr': {'class': 'form__input'}}) }}
+        {{ form_label(form.street, 'Street', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.streetNumber, {'attr': {'class': 'form__input'}}) }}
+        {{ form_label(form.streetNumber, 'Street Number', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.city, {'attr': {'class': 'form__input'}}) }}
+        {{ form_label(form.city, 'City', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.state, {'attr': {'class': 'form__input'}}) }}
+        {{ form_label(form.state, 'State', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.country, {'attr': { 'class' : 'form__input'}}) }}
+        {{ form_label(form.country, 'Country', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <div class="form__group">
+        {{ form_widget(form.id_address, {'attr': { 'class' : 'form__input'}}) }}
+        {{ form_label(form.id_address, 'ID address', {'label_attr': {'class': 'form__label'}}) }}
+    </div>
+    <button type="submit" class="btn btn--save">save</button>
     {{ form_end(form) }}
+    </section>
 {% endblock %}

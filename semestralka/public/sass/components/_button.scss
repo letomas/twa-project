@@ -16,6 +16,11 @@
         margin: 0 .3rem 0 .3rem;
     }
 
+    &--big {
+        font-size: 3rem !important;
+        line-height: 3.5rem !important;
+    }
+
     &--view {
         background-color: $color-white;
         border: 1px solid $color-pink;

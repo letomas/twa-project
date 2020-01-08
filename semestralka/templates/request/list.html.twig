@@ -1,24 +1,36 @@
-{% extends 'layout.html.twig' %}
+{% extends '/request/component/navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Manage Requests
+{% endblock %}
 
 {% block section %}
     <section class="section-list">
         {% if requests is empty %}
-            <h2>No request</h2>
+            <h2 class="section-list__notice">no request in database</h2>
+        {% else %}
+            <section class="section-list__hud-panel">
+                <h3>Request</h3>
+                <div class="section-list__hud-panel__tags">
+                    <span class="tag">capacity</span>
+                    <span class="tag">group</span>
+                </div>
+            </section>
+            {% for request in requests %}
+                <article>
+                    <h2>
+                        {{ request.room.name }}
+                    </h2>
+                    <div class="section-list__tags">
+                        <span class="tag">capacity</span>
+                        <span class="tag">group</span>
+                    </div>
+                    <div class="section-list__buttons">
+                        <a href="#" class="btn btn--edit">requests</a>
+                    </div>
+                </article>
+            {% endfor %}
         {% endif %}
 
-        {% for request in requests %}
-            <article>
-                <h2>
-                    Username
-                </h2>
-                <div class="section-list__tags">
-                    <span class="tag tag--room-name">{{ request.room.name }}</span>
-                    <span class="tag tag--date">date</span>
-                </div>
-                <div class="section-list__buttons">
-                    <a href="#" class="btn btn--view">details</a>
-                </div>
-            </article>
-        {% endfor %}
     </section>
 {% endblock %}

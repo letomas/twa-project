@@ -1,15 +1,15 @@
-{% extends 'layout.html.twig' %}
+{% extends '/building/component/navbar.html.twig' %}
 
 {% block title %}
-    Room booking - Building detail
+    Room Booking - Manage Buildings - Detail
 {% endblock %}
 
 {% block section %}
     <section class="section-detail">
         <article>
             <div>
-                <a href="#" class="btn btn--delete">delete</a>
-                <a href="#" class="btn btn--edit">edit</a>
+                <a href="{{ path( 'building_remove', { id: building.id } ) }}" class="btn btn--delete">delete</a>
+                <a href="{{ path( 'building_edit', { id: building.id } ) }}" class="btn btn--edit">edit</a>
             </div>
             <h2>
                 {{  building.name }}

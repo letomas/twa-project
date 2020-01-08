@@ -1,11 +1,11 @@
-{% extends 'layout.html.twig' %}
+{% extends '/room/component/navbar.html.twig' %}
 
 {% block title %}
-    Room detail
+    Room Booking - Manage Rooms - Detail
 {% endblock %}
 
 {% block section %}
-    <section class="section-room-detail">
+    <section class="section-detail">
         <article>
             <div>
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -26,7 +26,7 @@
             {% if room.manageBy is null %}
                 <span>Not manage by anyone</span>
             {% else %}
-                <span> {{ room.manageBy.name }}</span>
+                <span> {{ room.manageBy.username }}</span>
             {% endif %}
 
             <h3>Description</h3>

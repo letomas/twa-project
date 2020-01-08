@@ -1,23 +1,26 @@
-{% extends 'layout.html.twig' %}
+{% extends '/account/component/roomAdmins_navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Room Admins
+{% endblock %}
 
 {% block section %}
-    {#    pridej sem prosim nejaky nazev pro stranku#}
     <section class="section-list">
         {% if admins is empty %}
-            <h2>No room's admin in database</h2>
+            <h2 class="section-list__notice">no room's admin in database</h2>
+            <a href="{{ path( 'accounts')}}" class="section-list__notice__btn btn btn--add btn--big">add admin</a>
         {% endif %}
 
         {% for admin in admins %}
-            {#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
             <article>
-                <span>{{ admin.username }}</span>
-                <span>{{ admin.firstName }}</span>
-                <span>{{ admin.lastName }}</span>
-                <span>{{ admin.mail }}</span>
-                {#                oni se nad sebou lezi#}
-                <a href="#" class="btn btn--view">view</a>
-                <a href="#" class="btn btn-edit">edit</a>
-                <a href="#" class="btn btn--delete">delete</a>
+                <h2>{{ admin.username }}</h2>
+                <div class="section-list__tags">
+                    <span class="tag">{{ admin.mail }}</span>
+                </div>
+                <div class="section-list__buttons">
+                    <a href="{{ path('account_edit', {id : admin.id}) }}" class="btn btn--edit">edit</a>
+                    <a href="{{ path('account_detail', {id : admin.id}) }}" class="btn btn--view">view</a>
+                </div>
             </article>
         {% endfor %}
     </section>

@@ -20,7 +20,6 @@ class AccountCreateType extends AbstractType
             ->add('mail', TextType::class, ['label' => 'E-mail: '])
             ->add('firstName', TextType::class, ['label' => 'FirstName: '])
             ->add('lastName', TextType::class, ['label' => 'LastName: '])
-            ->add( 'submit', SubmitType::class, ['label' => 'Create'])
         ;
     }
 

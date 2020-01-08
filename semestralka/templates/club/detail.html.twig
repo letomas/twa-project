@@ -1,4 +1,26 @@
-{% extends 'layout.html.twig' %}
+{% extends '/club/component/navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Manage Clubs - Detail
+{% endblock %}
 
 {% block section %}
+    <section class="section-detail">
+        <article>
+            <div>
+                <a href="#" class="btn btn--edit">edit</a>
+            </div>
+            <h2>
+                Club Name
+            </h2>
+            <h3>Managed By</h3>
+            <span>admin username</span>
+            <h3>Number of members</h3>
+            <span>number of members</span>
+            <h3>Subgroup</h3>
+            <span>Subgroup</span>
+            <h3>Supergroup</h3>
+            <span>Supergroup</span>
+        </article>
+    </section>
 {% endblock %}

@@ -26,6 +26,7 @@ class BuildingType extends AbstractType
                 'class' => Room::class, 'choice_label' => 'name',
                 'multiple' => true, 'required' => false, 'label' => 'Rooms: '
             ])
+            ->add('id_address', TextType::class, ['label' => 'Id address: '])
         ;
     }
 

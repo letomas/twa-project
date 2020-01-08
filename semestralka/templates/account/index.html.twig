@@ -1,20 +1,36 @@
-{% extends 'layout.html.twig' %}
+{% extends '/account/component/account_navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Users
+{% endblock %}
 
 {% block section %}
-    {#    pridej sem prosim nejaky nazev pro stranku#}
     <section class="section-list">
+        {% if accounts is empty %}
+        <h2 class="section-list__notice">no user in database</h2>
+        <a href="{{ path( 'account_create')}}" class="section-list__notice__btn btn btn--add btn--big">add user</a>
+        {% else %}
+        <section class="section-list__hud-panel">
+            <h3>User</h3>
+            <div class="section-list__hud-panel__tags">
+                <span class="tag">Email</span>
+            </div>
+            <div class="section-list__hud-panel__buttons">
+                <a href="{{ path( 'account_create')}}" class="btn btn--add">add</a>
+            </div>
+        </section>
         {% for account in accounts %}
-            {#            udelal jsem zakladni vypisovani budov zmen styl prosim#}
             <article>
-                <span>{{ account.username }}</span>
-                <span>{{ account.firstName }}</span>
-                <span>{{ account.lastName }}</span>
-                <span>{{ account.mail }}</span>
-{#                oni se nad sebou lezi#}
-                <a href="#" class="btn btn--view">view</a>
-                <a href="#" class="btn btn-edit">edit</a>
-                <a href="#" class="btn btn--delete">delete</a>
+                <h2>{{ account.username }}</h2>
+                <div class="section-list__tags">
+                    <span class="tag">{{ account.mail }}</span>
+                </div>
+                <div class="section-list__buttons">
+                    <a href="{{ path('account_edit', {id : account.id}) }}" class="btn btn--edit">edit</a>
+                    <a href="{{ path('account_detail', {id : account.id}) }}" class="btn btn--view">view</a>
+                </div>
             </article>
         {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

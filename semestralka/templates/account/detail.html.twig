@@ -1,0 +1,23 @@
+{% extends '/account/component/account_navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Users - Detail
+{% endblock %}
+
+{% block section %}
+    <section class="section-detail">
+        <article>
+            <div>
+                <a href="{{ path( 'account_remove', { id: account.id } ) }}" class="btn btn--delete">delete</a>
+                <a href="{{ path( 'account_edit', { id: account.id } ) }}" class="btn btn--edit">edit</a>
+            </div>
+            <h2>
+                {{  account.username }}
+            </h2>
+            <h3>Email</h3>
+            <span>{{ account.mail }}</span>
+            <h3>Name</h3>
+            <span>{{ account.firstname }} {{ account.lastname }}</span>
+        </article>
+    </section>
+{% endblock %}

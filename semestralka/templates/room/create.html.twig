@@ -1,10 +1,33 @@
-{% extends 'layout.html.twig' %}
+{% extends '/room/component/navbar.html.twig' %}
 
-{% set title = 'Creating new room' %}
-{% set active = '' %}
+{% block title %}
+    Room Booking - Manage Rooms - Add
+{% endblock %}
+
 {% block section %}
-    <h1>Creating new room</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <section class="section-edit">
+        {{ form_start(form) }}
+        <div class="form__group">
+            {{ form_widget(form.name, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.capacity, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.capacity, 'Capacity', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.description, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.manageBy, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.manageBy, 'Managed By', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.building, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.building, 'Building', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <button type="submit" class="btn btn--save">save</button>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}

@@ -31,9 +31,9 @@
 
     & nav {
         position: absolute;
-        left: 10%;
-        top: 38%; 
-        transform: translate(50%, 0);
+        left: 25rem;
+        top: 38%;
+        width: calc(100% - 25rem);
 
         @include respond(tab-port) {
             top: 42%;
@@ -60,29 +60,45 @@
                 color: $color-pink;
             }
         }
-
-        & nav {
-            display: block;
-            overflow: hidden;
-            position: absolute;
-            background-color: $color-white;
-            width: 17rem;
-            height: 0;
-            left: 9.1rem;
-            top: 2.5rem;
-            box-shadow: 0 1px 6px rgba($color-black, .2);
-
-            & a {
-                display: block;
-            }
-        }
     }
 }
 
-#nav-option--highlighted {
-    color: $color-pink;
+#sub-nav--manage {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    background-color: $color-white;
+    width: 17rem;
+    height: 0;
+    left: 17.9rem;
+    top: 2.5rem;
+    box-shadow: 0 1px 6px rgba($color-black, .2);
+
+    & a {
+        display: block;
+    }
 }
 
-#nav-option--disabled:hover {
-    color: $color-grey-light;
+#sub-nav--account {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    background-color: $color-white;
+    width: 10rem;
+    height: 0;
+    left: 26.5rem;
+    top: 2.5rem;
+    box-shadow: 0 1px 6px rgba($color-black, .2);
+
+    & a {
+        display: block;
+    }
+}
+
+.nav-option--highlighted {
+    color: $color-pink !important;
+}
+
+.nav-option--disabled:hover {
+    color: $color-grey-light !important;
 }

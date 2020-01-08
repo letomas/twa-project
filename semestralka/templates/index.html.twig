@@ -3,22 +3,30 @@
 {% block section %}
     <section class="section-list">
         {% if rooms is empty %}
-            <h2>No room in database</h2>
-        {% endif %}
-
+        <h2 class="section-list__notice">no room in database</h2>
+        <a href="{{ path( 'room_create')}}" class="section-list__notice__btn btn btn--add btn--big">add room</a>
+        {% else %}
+        <section class="section-list__hud-panel">
+            <h3>Room</h3>
+            <div class="section-list__hud-panel__tags">
+                <span class="tag">capacity</span>
+                <span class="tag ">type</span>
+            </div>
+        </section>
         {% for room in rooms %}
             <article>
                 <h2>
                     <span>{{ room.name }}</span>
                 </h2>
                 <div class="section-list__tags">
-                    <span class="tag tag--capacity">{{ room.capacity }}</span>
-                    <span class="tag tag--room-type">{{ room.type }}</span>
+                    <span class="tag">{{ room.capacity }}</span>
+                    <span class="tag">{{ room.type }}</span>
                 </div>
                 <div class="section-list__buttons">
-                    <a href={{ path('room_detail', {id : room.id}) }}, class="btn btn--view">view</a>
+                    <a href="{{ path('room_detail', {id : room.id}) }}" class="btn btn--view">view</a>
                 </div>
             </article>
         {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

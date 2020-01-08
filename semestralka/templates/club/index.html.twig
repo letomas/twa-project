@@ -1,4 +1,40 @@
-{% extends 'layout.html.twig' %}
+{% extends '/club/component/navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Manage Clubs
+{% endblock %}
 
 {% block section %}
+    <section class="section-list">
+        {% if clubs is empty %}
+            <h2 class="section-list__notice">no club in database</h2>
+            <a href="{{ path( 'club_create')}}" class="section-list__notice__btn btn btn--add btn--big">add club</a>
+        {% else %}
+            <section class="section-list__hud-panel">
+                <h3>Club</h3>
+                <div class="section-list__hud-panel__tags">
+                    <span class="tag">managed by</span>
+                </div>
+                <div class="section-list__hud-panel__buttons">
+                    <a href="{{ path( 'building_create')}}" class="btn btn--add">add</a>
+                </div>
+            </section>
+            {% for club in clubs %}
+                <article>
+                    <h2>
+                        {{ club.name }}
+                    </h2>
+                    <div class="section-list__tags">
+                        <span class="tag">{{ club.manageBy }}</span>
+                    </div>
+                    <div class="section-list__buttons">
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a href="{{ path( 'building_edit', {id: building.id} ) }}" class="btn btn--edit">edit</a>
+                        {% endif %}
+                        <a href="{{ path( 'building_detail', {id: building.id} ) }}" class="btn btn--view">view</a>
+                    </div>
+                </article>
+            {% endfor %}
+        {% endif %}
+    </section>
 {% endblock %}

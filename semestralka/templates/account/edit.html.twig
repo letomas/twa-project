@@ -1,10 +1,33 @@
-{% extends 'layout.html.twig' %}
+{% extends '/account/component/account_navbar.html.twig' %}
 
-{% set title = 'Edit {{ account.firstName }} account' %}
-{% set active = '' %}
+{% block title %}
+    Room Booking - Users - Edit
+{% endblock %}
+
 {% block section %}
-    <h1>Edit {{ account.firstName }} account</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <section class="section-edit">
+        {{ form_start(form) }}
+        <div class="form__group">
+            {{ form_widget(form.username, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.username, 'Username', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.plainPassword, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.plainPassword, 'Password', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.mail, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.mail, 'Email', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.firstName, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.firstName, 'Fristname', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.lastName, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.lastName, 'Lastname', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <button type="submit" class="btn btn--save">save</button>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}

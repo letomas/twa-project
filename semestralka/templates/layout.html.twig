@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <title>{% block title 'Room Booking'|title %}</title>
     <script type="text/javascript" src="/js/script.js" async></script>
 </head>
+
 <body>
 <div class="header-navigation">
     <h1>
@@ -16,7 +18,7 @@
     </h1>
     {% block headerNavigation %}
         <nav>
-            <a href="{{ path( 'index' ) }}" id="nav-option--highlighted">rooms</a>
+            <a href="{{ path( 'index' ) }}" class="nav-option--highlighted">rooms</a>
             <a href="">bookings</a>
             <a id="sub-nav-title--manage" href="#">manage</a>
             <nav id="sub-nav--manage">
@@ -25,19 +27,23 @@
                 <a href="{{ path( 'club' ) }}">clubs</a>
                 <a href="{{ path('rooms') }}">rooms</a>
                 <a href="{{ path( 'buildings' ) }}">buildings</a>
+                <a href="{{ path( 'accounts' ) }}">users</a>
             </nav>
             {% if app.user %}
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                <a id="sub-nav-title--account" href="#">{{ app.user.username }}</a>
+                <nav id="sub-nav--account">
+                    <a href="{{ path( 'account_detail', { id: app.user.id } ) }}">account</a>
+                    <a href="{{ path('app_logout') }}">logout</a>
+                </nav>
             {% else %}
-                <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
+                <a class="header-navigation__account" href="{{ path( 'app_login' ) }}">login</a>
             {% endif %}
         </nav>
     {% endblock %}
 </div>
 {% block section %}
 {% endblock %}
-</body>
-
+{#
 <footer>
     <div class="copyright">
         Vytvorili <a href="mailto:nguyed14@fit.cvut.cz">Nguyen Duc Thang</a>,
@@ -46,4 +52,7 @@
         v ramci predmetu <a href="https://courses.fit.cvut.cz/BI-TWA/">BI-TWA.1</a>
     </div>
 </footer>
+#}
+</body>
+
 </html>

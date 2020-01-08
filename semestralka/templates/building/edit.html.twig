@@ -1,4 +1,8 @@
-{% extends 'layout.html.twig' %}
+{% extends '/building/component/navbar.html.twig' %}
+
+{% block title %}
+    Room Booking - Manage Buildings - Edit
+{% endblock %}
 
 {% block section %}
     <section class="section-edit">
@@ -26,6 +30,10 @@
         <div class="form__group">
             {{ form_widget(form.country, {'attr': { 'class' : 'form__input'}}) }}
             {{ form_label(form.country, 'Country', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.id_address, {'attr': { 'class' : 'form__input'}}) }}
+            {{ form_label(form.id_address, 'ID address', {'label_attr': {'class': 'form__label'}}) }}
         </div>
         <button type="submit" class="btn btn--save">save</button>
         {{ form_end(form) }}

@@ -1,14 +1,21 @@
-{% extends 'layout.html.twig' %}
+{% extends '/building/component/navbar.html.twig' %}
 
 {% block title %}
-    Room Booking - Manage Buldings
+    Room Booking - Manage Buildings
 {% endblock %}
 
 {% block section %}
     <section class="section-list">
         {% if buildings is empty %}
-            <h2>No building in database</h2>
-        {% endif %}
+            <h2 class="section-list__notice">no building in database</h2>
+            <a href="{{ path( 'building_create')}}" class="section-list__notice__btn btn btn--add btn--big">add building</a>
+        {% else %}
+        <section class="section-list__hud-panel">
+            <h3>Building</h3>
+            <div class="section-list__hud-panel__buttons">
+                <a href="{{ path( 'building_create')}}" class="btn btn--add">add</a>
+            </div>
+        </section>
         {% for building in buildings %}
             <article>
                 <h2>
@@ -22,5 +29,6 @@
                 </div>
             </article>
         {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

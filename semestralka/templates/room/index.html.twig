@@ -1,44 +1,40 @@
-{% extends 'layout.html.twig' %}
+{% extends '/room/component/navbar.html.twig' %}
 
-{% block headerNavigation %}
-<nav>
-    <a href="{{ path( 'index' ) }}">rooms</a>
-    <a href="">bookings</a>
-    <a id="sub-nav-title--manage" href="#">manage</a>
-    <nav id="sub-nav--manage">
-        <a href="{{ path( 'requests' ) }}" >room requests</a>
-        <a href="">room admins</a>
-        <a href="{{ path( 'club' ) }}">clubs</a>
-        <a href="{{ path('rooms') }}"  id="nav-option--highlighted">rooms</a>
-        <a href="{{ path( 'buildings' ) }}">buildings</a>
-    </nav>
-    <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
-</nav>
+{% block title %}
+    Room Booking - Manage Rooms
 {% endblock %}
 
 {% block section %}
+    <section class="section-list">
         {% if rooms is empty %}
-            <h2>No room in database</h2>
-        {% endif %}
-
+            <h2 class="section-list__notice">no room in database</h2>
+            <a href="{{ path( 'room_create')}}" class="section-list__notice__btn btn btn--add btn--big">add room</a>
+        {% else %}
+        <section class="section-list__hud-panel">
+            <h3>Room</h3>
+            <div class="section-list__hud-panel__tags">
+                <span class="tag tag--dark">capacity</span>
+                <span class="tag tag--dark">type</span>
+            </div>
+            <div class="section-list__hud-panel__buttons">
+                <a href="{{ path( 'room_create')}}" class="btn btn--add">add</a>
+            </div>
+        </section>
         {% for room in rooms %}
             <article>
                 <h2>
                     <span>{{ room.name }}</span>
                 </h2>
                 <div class="section-list__tags">
-                    <span class="tag tag--capacity">{{ room.capacity }}</span>
-                    <span class="tag tag--room-type">{{ room.type }}</span>
+                    <span class="tag">{{ room.capacity }}</span>
+                    <span class="tag">{{ room.type }}</span>
                 </div>
                 <div class="section-list__buttons">
-                    {% if room.requests is not defined %}
-                        <a href="#" class="btn btn--view">book</a>
-                    {% else %}
-                        <a href="#" class="btn btn--view">occupy</a>
-                    {% endif %}
+                    <a href="{{ path('room_edit', {id : room.id}) }}" class="btn btn--edit">edit</a>
                     <a href="{{ path('room_detail', {id : room.id}) }}" class="btn btn--view">view</a>
                 </div>
             </article>
         {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

@@ -20,19 +20,9 @@ class Building
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $country;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $id_address;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -45,14 +35,24 @@ class Building
     private $streetNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $state;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $id_address;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Room", mappedBy="building", cascade={"remove", "persist"})

@@ -39,7 +39,7 @@ class ClubController extends AbstractController
         $clubs = $this->getDoctrine()->getRepository(Club::class)->findAll();
 
         return $this->render('club/index.html.twig', [
-            'club' => $clubs,
+            'clubs' => $clubs,
         ]);
     }
 

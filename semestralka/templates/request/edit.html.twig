@@ -1,10 +1,21 @@
-{% extends 'layout.html.twig' %}
+{% extends '/request/component/navbar.html.twig' %}
 
-{% set title = 'Edit request' %}
-{% set active = '' %}
-{% block content %}
-    <h1>Edit request</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+{% block title %}
+    Room Booking - Manage Requests - Edit
+{% endblock %}
+
+{% block section %}
+    <section class="section-edit">
+        {{ form_start(form) }}
+        <div class="form__group">
+            {{ form_widget(form.start, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.start, 'From', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <div class="form__group">
+            {{ form_widget(form.end, {'attr': {'class': 'form__input'}}) }}
+            {{ form_label(form.end, 'To', {'label_attr': {'class': 'form__label'}}) }}
+        </div>
+        <button type="submit" class="btn btn--save">save</button>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}

@@ -26,7 +26,8 @@ ORDER: Base + typochraphy > general layout + grid > page layout > components
 
 html {
   font-size: 62.5%;
-  /* 10px and enables browser zooming */ }
+  /* 10px and enables browser zooming */
+  min-height: 100%; }
   @media only screen and (min-width: 112.5em) {
     html {
       font-size: 75%; } }
@@ -69,6 +70,10 @@ h2 {
   font-size: 1.6rem;
   line-height: 1.7rem;
   margin: 0 .3rem 0 .3rem; }
+
+.btn--big {
+  font-size: 3rem !important;
+  line-height: 3.5rem !important; }
 
 .btn--view {
   background-color: #fff;
@@ -177,7 +182,8 @@ form div label[class=required] {
   font-size: 1.2rem;
   font-weight: 700;
   margin-left: 2rem;
-  margin-top: .7rem;
+  margin-top: -13rem;
+  margin-bottom: 15rem;
   display: block;
   transform: translateY(14rem); }
 
@@ -202,26 +208,27 @@ form select {
   font-family: "Nunito", sans-serif;
   /*
     box-shadow: 0 .1rem .6rem rgba($color-black, .2);*/ }
-  .tag--capacity {
+  .tag--purple {
     /*
         background-color: $color-purple-light;
         color: $color-white;*/
     color: #BDADFE; }
-  .tag--room-type {
+  .tag--green {
     /*
         background-color: $color-green;
         color: $color-white;*/
     color: #55c57a; }
-  .tag--room-name, .tag--date {
+  .tag--dark {
     color: #707070; }
 
 footer {
+  display: block;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
   font-size: 1.2rem;
-  height: 3rem; }
+  height: 5rem; }
 
 .header-navigation {
   position: relative;
@@ -250,9 +257,9 @@ footer {
         top: 40%; } }
   .header-navigation nav {
     position: absolute;
-    left: 10%;
+    left: 25rem;
     top: 38%;
-    transform: translate(50%, 0); }
+    width: calc(100% - 25rem); }
     @media only screen and (max-width: 56.25em) {
       .header-navigation nav {
         top: 42%; } }
@@ -272,24 +279,38 @@ footer {
       text-transform: uppercase; }
       .header-navigation nav a:hover {
         color: #FC9696; }
-    .header-navigation nav nav {
-      display: block;
-      overflow: hidden;
-      position: absolute;
-      background-color: #fff;
-      width: 17rem;
-      height: 0;
-      left: 9.1rem;
-      top: 2.5rem;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
-      .header-navigation nav nav a {
-        display: block; }
 
-#nav-option--highlighted {
-  color: #FC9696; }
+#sub-nav--manage {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  background-color: #fff;
+  width: 17rem;
+  height: 0;
+  left: 17.9rem;
+  top: 2.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
+  #sub-nav--manage a {
+    display: block; }
 
-#nav-option--disabled:hover {
-  color: #A2A2A2; }
+#sub-nav--account {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  background-color: #fff;
+  width: 10rem;
+  height: 0;
+  left: 26.5rem;
+  top: 2.5rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
+  #sub-nav--account a {
+    display: block; }
+
+.nav-option--highlighted {
+  color: #FC9696 !important; }
+
+.nav-option--disabled:hover {
+  color: #A2A2A2 !important; }
 
 .section-account-list {
   max-width: 85rem;
@@ -373,6 +394,7 @@ footer {
     font-size: 40rem; }
 
 .section-list {
+  position: relative;
   max-width: 85rem;
   margin: 5rem auto 10rem auto; }
   .section-list article {
@@ -408,3 +430,22 @@ footer {
     right: 2.5rem;
     top: 50%;
     transform: translate(0, -50%); }
+  .section-list__notice {
+    text-align: center;
+    margin-bottom: 5rem; }
+    .section-list__notice__btn {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0); }
+  .section-list__hud-panel {
+    padding: 0 2.5rem 0 2.5rem; }
+    .section-list__hud-panel * {
+      display: inline-block; }
+    .section-list__hud-panel h3 {
+      font-size: 1.4rem; }
+    .section-list__hud-panel__tags {
+      position: absolute;
+      right: 30rem; }
+    .section-list__hud-panel__buttons {
+      position: absolute;
+      right: 0; }
