@@ -84,6 +84,16 @@ class AccountController extends AbstractController
         ]);
     }
 
+    public function getReservationsAction() {
+        $user = $this->getUser();
+
+        $requests = $user->getRequestsAttendees();
+
+        return $this->render('bookings/index.html.twig', [
+            'requests' => $requests
+        ]);
+    }
+
     /**
      * @Route("/create", name="account_create", defaults={"id": null})
      * @Route("/edit/{id}", name="account_edit", requirements={"id": "\d+"})
