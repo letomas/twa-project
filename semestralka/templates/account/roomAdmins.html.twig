@@ -13,23 +13,22 @@
         <section class="section-list__hud-panel">
             <h3>Username</h3>
             <div class="section-list__hud-panel__tags">
-                <span class="tag">Email</span>
+                <span class="tag">Room</span>
             </div>
             <div class="section-list__hud-panel__buttons">
                 <a href="{{ path( 'accounts')}}" class="btn btn--add">add</a>
             </div>
         </section>
         {% for admin in admins %}
-            <article>
                 {% for room in admin.roomsManager %}
                     <article>
                         <h2>{{ admin.username }}</h2>
                         <div class="section-list__tags">
-                            <span class="tag">{{ admin.mail }}</span>
+                            <span class="tag">{{ room.name }}</span>
                         </div>
                         <div class="section-list__buttons">
-                            <a href="{{ path('room_edit', {id : room.id}) }}" class="btn btn--edit">edit room</a>
-                            <a href="{{ path('account_detail', {id : admin.id}) }}" class="btn btn--view">view admin</a>
+                            <a href="{{ path('room_edit', {id : room.id}) }}" class="btn btn--edit">reassign</a>
+                            <a href="{{ path('account_detail', {id : admin.id}) }}" class="btn btn--view">view</a>
                         </div>
                     </article>
                 {% endfor %}

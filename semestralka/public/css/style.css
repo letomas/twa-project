@@ -443,7 +443,7 @@ footer {
     transform: translate(0, -50%); }
     @media only screen and (max-width: 37.5em) {
       .section-list__tags {
-        right: 15rem; } }
+        right: 25rem; } }
     @media only screen and (max-width: 28.75em) {
       .section-list__tags {
         display: none !important; } }
@@ -470,7 +470,7 @@ footer {
       right: 30rem; }
       @media only screen and (max-width: 37.5em) {
         .section-list__hud-panel__tags {
-          right: 15rem; } }
+          right: 25rem; } }
       @media only screen and (max-width: 28.75em) {
         .section-list__hud-panel__tags {
           display: none !important; } }
