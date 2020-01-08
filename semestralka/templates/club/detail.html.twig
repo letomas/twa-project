@@ -8,19 +8,34 @@
     <section class="section-detail">
         <article>
             <div>
-                <a href="#" class="btn btn--edit">edit</a>
+                <a href="{{ path( 'club_edit', {id: club.id} ) }}" class="btn btn--edit">edit</a>
             </div>
             <h2>
-                Club Name
+                {{ club.name }}
             </h2>
             <h3>Managed By</h3>
-            <span>admin username</span>
+            {% if club.manageBy is empty %}
+                <span>Don't have any group admin.</span>
+            {% else %}
+                {% for manager in club.manageBy %}
+                    <span> {{ club.manageBy.username }}</span>
+                {% endfor %}
+            {% endif %}
             <h3>Number of members</h3>
             <span>number of members</span>
-            <h3>Subgroup</h3>
-            <span>Subgroup</span>
+            <h3>SubClub</h3>
+            {% if club.subClubs is empty %}
+                <span>Don't have any subClub.</span>
+            {% endif %}
+            {% for subClub in club.subClubs %}
+                <span>{{ subClub.name }}</span>
+            {% endfor %}
             <h3>Supergroup</h3>
-            <span>Supergroup</span>
+            {% if club.superClub is not defined %}
+                <span>{{ club.superClub.name }}</span>
+            {% else %}
+                <span>Don't have superClub.</span>
+            {% endif %}
         </article>
     </section>
 {% endblock %}

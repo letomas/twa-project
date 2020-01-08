@@ -28,7 +28,7 @@ class Club
      * @ORM\OneToMany(targetEntity="Account", mappedBy="clubManager", cascade={"persist"})
      * @MaxDepth(1)
      */
-    private $manageBy;
+    private $manageBy = [];
 
     /**
      * @ORM\ManyToMany(targetEntity="Club", inversedBy="superClub")
@@ -38,7 +38,7 @@ class Club
      * )
      * @MaxDepth(1)
      */
-    private $subClub = [];
+    private $subClubs = [];
 
     /**
      * @ORM\ManyToMany(targetEntity="Club", mappedBy="subClub")
@@ -65,15 +65,47 @@ class Club
     /**
      * @return mixed
      */
-    public function getManageBy()
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getManageBy(): array
     {
         return $this->manageBy;
     }
 
     /**
-     * @param mixed $manageBy
+     * @param array $manageBy
      */
-    public function setManageBy($manageBy): void
+    public function setManageBy(array $manageBy): void
     {
         $this->manageBy = $manageBy;
     }
@@ -81,17 +113,17 @@ class Club
     /**
      * @return array
      */
-    public function getSubClub(): array
+    public function getSubClubs(): array
     {
-        return $this->subClub;
+        return $this->subClubs;
     }
 
     /**
-     * @param array $subClub
+     * @param array $subClubs
      */
-    public function setSubClub(array $subClub): void
+    public function setSubClubs(array $subClubs): void
     {
-        $this->subClub = $subClub;
+        $this->subClubs = $subClubs;
     }
 
     /**
@@ -140,22 +172,5 @@ class Club
     public function setRooms(array $rooms): void
     {
         $this->rooms = $rooms;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 }

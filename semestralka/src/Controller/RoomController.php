@@ -80,8 +80,7 @@ class RoomController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $form = $this->createForm(RoomType::class, $room)
-            ->add( 'submit', SubmitType::class, ['label' => 'Save']);
+        $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
