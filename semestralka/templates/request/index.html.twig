@@ -23,11 +23,11 @@
             </h2>
             <div class="section-list__tags">
                 <span class="tag">{{ request.room.capacity }}</span>
-                <span class="tag">{{ request.user.username }}</span>
+                <span class="tag">{{ request.createBy.username }}</span>
             </div>
             <div class="section-list__buttons">
-                <a href="" class="btn btn--delete">deny</a>
-                <a href="" class="btn btn--view">view</a>
+                <a href=""{{ path('request_remove') }} class="btn btn--delete">deny</a>
+                <a href="{{ path( 'request_detail', {id: request.id})}}" class="btn btn--view">view</a>
             </div>
         </article>
         {% endfor %}
