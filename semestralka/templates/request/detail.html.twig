@@ -4,22 +4,6 @@
     Room Booking - Manage Requests - Detail
 {% endblock %}
 
-{% block headerNavigation %}
-    <nav>
-        <a href="{{ path( 'index' ) }}">rooms</a>
-        <a href="">bookings</a>
-        <a id="sub-nav-title--manage" href="#">manage</a>
-        <nav id="sub-nav--manage">
-            <a href="{{ path( 'requests' ) }}" id="nav-option--highlighted">room requests</a>
-            <a href="">room admins</a>
-            <a href="{{ path( 'groups' ) }}">groups</a>
-            <a href="{{ path('rooms') }}">rooms</a>
-            <a href="{{ path( 'buildings' ) }}">buildings</a>
-        </nav>
-        <a class="header-navigation__logout" href="{{ path( 'app_login' ) }}">login</a>
-    </nav>
-{% endblock %}
-
 {% block section %}
     <section class="section-detail">
         <article>
@@ -28,21 +12,19 @@
                 <a href="#" class="btn btn--approve">approve</a>
             </div>
             <h2>
-                Room Name
+                {{ request.room.name }}
             </h2>
             <h3>Request by</h3>
-            <span>username</span>
-            <h3>Number of attendees</h3>
-            <span>number of attendees</span>
+            <span>{{ request.user.username }}</span>
             <h3>Room Type</h3>
-            <span>room type</span>
+            <span>{{ request.room.club }}</span>
             <h3>Capacity</h3>
-            <span>capacity</span>
+            <span>{{ request.room.capacity }}</span>
             <h3>Admin</h3>
-            <span>admin username</span>
+            <span>{{ request.room.user.username }}</span>
             <h3>Description</h3>
             <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit distinctio cupiditate nisi. Quia non saepe facilis commodi asperiores eos. Mollitia id ipsum assumenda velit aut, magni illo illum cupiditate quibusdam!
+                {{ request.room.description }}
             </p>
         </article>
     </section>
