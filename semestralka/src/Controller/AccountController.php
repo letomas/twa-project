@@ -84,6 +84,9 @@ class AccountController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/bookings", name="bookings")
+     */
     public function getReservationsAction() {
         $user = $this->getUser();
 
