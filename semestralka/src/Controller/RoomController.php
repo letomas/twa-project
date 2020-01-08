@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Service\RoomOperation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -109,6 +110,8 @@ class RoomController extends AbstractController
 
     /**
      * @Route("/remove/{id}", name="room_remove", requirements={"id": "\d+"})
+     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
      *
      * @param $id
      * @return Response

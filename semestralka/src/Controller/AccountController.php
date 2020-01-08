@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Form\AccountCreateType;
 use App\Form\AccountSuperAdminType;
 use App\Service\AccountOperation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,6 +88,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/bookings", name="bookings")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function getReservationsAction() {
         $user = $this->getUser();
@@ -149,6 +151,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/remove/{id}", name="account_remove", requirements={"id": "\d+"})
+     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
      *
      * @param $id
      * @return Response

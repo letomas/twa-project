@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Building;
 use App\Form\BuildingType;
 use App\Service\BuildingOperation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,6 +110,8 @@ class BuildingController extends AbstractController
 
     /**
      * @Route("/remove/{id}", name="building_remove", requirements={"id": "\d+"})
+     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
      *
      * @param $id
      * @return Response

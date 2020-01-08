@@ -141,8 +141,8 @@ class RequestVoter extends Voter
 
     private function isRoomGroupAdmin(Account $account, Room $room)
     {
-        $roomGroup = $room->getGroup();
-        $clubManagedByAccount = $account->getGroupManager();
+        $roomGroup = $room->getClub();
+        $clubManagedByAccount = $account->getClubManager();
 
         if(!$clubManagedByAccount) {
             return false;

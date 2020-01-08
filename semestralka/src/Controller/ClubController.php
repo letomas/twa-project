@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Club;
 use App\Form\ClubType;
 use App\Service\ClubOperation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,6 +110,8 @@ class ClubController extends AbstractController
 
     /**
      * @Route("/remove/{id}", name="club_remove", requirements={"id": "\d+"})
+     *
+     * @IsGranted("ROLE_SUPER_ADMIN")
      *
      * @param $id
      * @return Response
