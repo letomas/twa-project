@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Account;
 use App\Entity\Club;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\Room;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
@@ -26,7 +27,7 @@ class ClubType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Username: '])
+            ->add('name', TextType::class, ['label' => 'Name: '])
             ->add('manageBy', EntityType::class, [
                 'class' => Account::class, 'choice_label' => 'username',
                 'multiple' => false, 'required' => false, 'label' => 'Manage by: '
@@ -37,11 +38,15 @@ class ClubType extends AbstractType
             ])
             ->add('superClub', EntityType::class, [
                 'class' => Club::class, 'choice_label' => 'name',
-                'multiple' => false, 'required' => false, 'label' => 'Subgroups: '
+                'multiple' => false, 'required' => false, 'label' => 'Supergroup: '
             ])
             ->add('rooms', EntityType::class, [
-                'class' => Club::class, 'choice_label' => 'name',
-                'multiple' => true, 'required' => false, 'label' => 'Subgroups: ',
+                'class' => Room::class, 'choice_label' => 'name',
+                'multiple' => true, 'required' => false, 'label' => 'Rooms: ',
+            ])
+            ->add('members', EntityType::class, [
+                'class' => Account::class, 'choice_label' => 'username',
+                'multiple' => true, 'required' => false, 'label' => 'Members: '
             ])
         ;
     }
